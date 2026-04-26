@@ -1,0 +1,107 @@
+name: Technical Task
+description: Infrastruktur, Architektur, CI/CD oder technische Verbesserungen
+title: "[Tech]: "
+labels:
+  - tech
+body:
+  - type: input
+    id: backlog_id
+    attributes:
+      label: Backlog ID
+      description: Zum Beispiel HB-001
+      placeholder: HB-000
+    validations:
+      required: true
+
+  - type: input
+    id: epic
+    attributes:
+      label: Epic
+      description: Zum Beispiel EPC-A
+      placeholder: EPC-A
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Draft
+        - Ready
+        - In Progress
+        - In Review
+        - Blocked
+        - Done
+        - Released
+    validations:
+      required: true
+
+  - type: input
+    id: target_release
+    attributes:
+      label: Zielrelease
+      description: Zum Beispiel REL-0.1.0
+      placeholder: REL-0.1.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: goal
+    attributes:
+      label: Ziel
+      description: Was soll technisch erreicht oder verbessert werden?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Was gehört dazu, was bewusst nicht?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Akzeptanzkriterien
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: architecture_notes
+    attributes:
+      label: Architektur- und Integrationshinweise
+    validations:
+      required: true
+
+  - type: textarea
+    id: cicd_notes
+    attributes:
+      label: CI/CD-Auswirkungen
+      description: Welche Pipeline-Schritte müssen ergänzt oder angepasst werden?
+    validations:
+      required: true
+
+  - type: textarea
+    id: test_notes
+    attributes:
+      label: Testhinweise
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: ready_check
+    attributes:
+      label: Ready-Check
+      options:
+        - label: Scope ist klar abgegrenzt
+          required: true
+        - label: Architektur- und CI/CD-Auswirkungen sind benannt
+          required: true
+        - label: Akzeptanzkriterien sind definiert
+          required: true

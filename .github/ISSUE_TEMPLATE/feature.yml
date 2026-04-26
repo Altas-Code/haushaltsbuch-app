@@ -1,0 +1,133 @@
+name: Feature
+description: Neues Feature oder funktionale Erweiterung anlegen
+title: "[Feature]: "
+labels:
+  - feature
+body:
+  - type: input
+    id: backlog_id
+    attributes:
+      label: Backlog ID
+      description: Zum Beispiel HB-012
+      placeholder: HB-000
+    validations:
+      required: true
+
+  - type: input
+    id: epic
+    attributes:
+      label: Epic
+      description: Zum Beispiel EPC-C
+      placeholder: EPC-A
+    validations:
+      required: true
+
+  - type: input
+    id: use_case
+    attributes:
+      label: Use Case Referenz
+      description: Zum Beispiel UC-2.1
+      placeholder: UC-1.1
+    validations:
+      required: true
+
+  - type: input
+    id: persona
+    attributes:
+      label: Persona Referenz
+      description: Zum Beispiel PER-01
+      placeholder: PER-01
+    validations:
+      required: false
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Draft
+        - Ready
+        - In Progress
+        - In Review
+        - Blocked
+        - Done
+        - Released
+    validations:
+      required: true
+
+  - type: input
+    id: target_release
+    attributes:
+      label: Zielrelease
+      description: Zum Beispiel REL-1.0.0
+      placeholder: REL-1.0.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Beschreibung
+      description: Was soll umgesetzt werden und warum?
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Akzeptanzkriterien
+      description: Klar prüfbare Kriterien
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: design_notes
+    attributes:
+      label: UX- und Design-Hinweise
+      description: Relevante Hinweise aus Design-Prinzipien oder User Journey
+    validations:
+      required: false
+
+  - type: textarea
+    id: technical_notes
+    attributes:
+      label: Technische Hinweise
+      description: Architektur, Datenmodell, Integrations- oder Migrationshinweise
+    validations:
+      required: false
+
+  - type: textarea
+    id: test_notes
+    attributes:
+      label: Testhinweise
+      description: Welche Tests werden erwartet?
+      placeholder: |
+        Unit:
+        Integration:
+        E2E:
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Abhängigkeiten und Risiken
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: ready_check
+    attributes:
+      label: Ready-Check
+      options:
+        - label: Akzeptanzkriterien sind klar
+          required: true
+        - label: Epic und Use Case sind zugeordnet
+          required: true
+        - label: Zielrelease ist gesetzt
+          required: true
+        - label: Test- und CI/CD-Auswirkungen wurden bedacht
+          required: true

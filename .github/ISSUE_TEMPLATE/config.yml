@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Project documentation
+    url: https://github.com/Altas-Code/haushaltsbuch-app
+    about: Please review the project docs, roadmap and definition of done before opening an issue.

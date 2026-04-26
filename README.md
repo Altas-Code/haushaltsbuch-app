@@ -208,7 +208,8 @@ haushaltsbuch-app/
 │  ├─ backlog-and-roadmap.md
 │  ├─ definition-of-done.md
 │  ├─ project-management-and-traceability.md
-│  └─ traceability-matrix.md
+│  ├─ traceability-matrix.md
+│  └─ branching-strategy.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/

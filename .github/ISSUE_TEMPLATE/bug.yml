@@ -1,0 +1,117 @@
+name: Bug
+description: Fehler oder Regression melden
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: input
+    id: backlog_id
+    attributes:
+      label: Backlog ID
+      description: Falls vorhanden, zum Beispiel HB-099
+      placeholder: HB-000
+    validations:
+      required: false
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Schweregrad
+      options:
+        - low
+        - medium
+        - high
+        - critical
+    validations:
+      required: true
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      options:
+        - Draft
+        - Ready
+        - In Progress
+        - In Review
+        - Blocked
+        - Done
+        - Released
+    validations:
+      required: true
+
+  - type: input
+    id: target_release
+    attributes:
+      label: Zielrelease
+      description: Zum Beispiel REL-1.0.0
+      placeholder: REL-1.0.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Fehlerbeschreibung
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Schritte zur Reproduktion
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Erwartetes Verhalten
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Tatsächliches Verhalten
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Auswirkung
+      description: Wen oder was betrifft der Fehler?
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical_notes
+    attributes:
+      label: Technische Hinweise
+    validations:
+      required: false
+
+  - type: textarea
+    id: test_notes
+    attributes:
+      label: Testhinweise
+      description: Welche Regression-Tests müssen ergänzt werden?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: dod_check
+    attributes:
+      label: Done-Vorbereitung
+      options:
+        - label: Reproduktion ist beschrieben
+          required: true
+        - label: Auswirkung ist eingeordnet
+          required: true
+        - label: Testbedarf ist benannt
+          required: true
