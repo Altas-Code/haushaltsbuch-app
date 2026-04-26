@@ -204,7 +204,8 @@ haushaltsbuch-app/
 │  ├─ vision.md
 │  ├─ personas.md
 │  ├─ user-journey.md
-│  └─ design-principles.md
+│  ├─ design-principles.md
+│  └─ backlog-and-roadmap.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
