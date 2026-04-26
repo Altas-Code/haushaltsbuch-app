@@ -209,7 +209,9 @@ haushaltsbuch-app/
 │  ├─ definition-of-done.md
 │  ├─ project-management-and-traceability.md
 │  ├─ traceability-matrix.md
-│  └─ branching-strategy.md
+│  ├─ branching-strategy.md
+│  ├─ github-labels.md
+│  └─ mvp-issues.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
