@@ -203,7 +203,8 @@ haushaltsbuch-app/
 │  ├─ tech-stack.md
 │  ├─ vision.md
 │  ├─ personas.md
-│  └─ user-journey.md
+│  ├─ user-journey.md
+│  └─ design-principles.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
