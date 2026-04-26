@@ -201,7 +201,8 @@ haushaltsbuch-app/
 │  ├─ roadmap.md
 │  ├─ docker.md
 │  ├─ tech-stack.md
-│  └─ vision.md
+│  ├─ vision.md
+│  └─ personas.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
