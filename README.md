@@ -205,7 +205,8 @@ haushaltsbuch-app/
 │  ├─ personas.md
 │  ├─ user-journey.md
 │  ├─ design-principles.md
-│  └─ backlog-and-roadmap.md
+│  ├─ backlog-and-roadmap.md
+│  └─ definition-of-done.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
