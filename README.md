@@ -206,7 +206,9 @@ haushaltsbuch-app/
 │  ├─ user-journey.md
 │  ├─ design-principles.md
 │  ├─ backlog-and-roadmap.md
-│  └─ definition-of-done.md
+│  ├─ definition-of-done.md
+│  ├─ project-management-and-traceability.md
+│  └─ traceability-matrix.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
