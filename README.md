@@ -64,6 +64,8 @@ Die Struktur ist aktuell stark dokumentationsgetrieben, damit Produkt, Architekt
 haushaltsbuch-app/
 ├─ README.md
 ├─ .github/
+│  ├─ workflows/
+│  │  └─ ci.yml
 │  ├─ ISSUE_TEMPLATE/
 │  │  ├─ bug.yml
 │  │  ├─ config.yml
@@ -91,7 +93,19 @@ haushaltsbuch-app/
 │  ├─ traceability-matrix.md
 │  ├─ branching-strategy.md
 │  └─ github-labels.md
+├─ src/
+│  ├─ app/
+│  ├─ components/
+│  └─ domain/
+├─ tests/
+│  ├─ unit/
+│  └─ integration/
+├─ package.json
+├─ tsconfig.json
+├─ next.config.ts
+├─ vitest.config.ts
 ├─ docker-compose.yml
+├─ .dockerignore
 └─ .gitignore
 ```
 
@@ -111,6 +125,10 @@ haushaltsbuch-app/
 - `docs/screen-inventory.md` -> Screen-Übersicht und Informationsarchitektur
 - `docs/docker.md` -> Docker-Zielbild und Betrieb
 - `docs/cicd-blueprint.md` -> CI/CD-Zielbild und Pipeline-Anforderungen
+- `src/app/` -> Next.js App Router, Layout und Einstiegspunkte
+- `src/components/` -> UI-Bausteine und Seitenkomposition
+- `src/domain/` -> fachliche Logik wie Berechnungen und Regeln
+- `tests/` -> Unit- und Integrationstests
 
 ### Planung und Delivery
 - `docs/backlog-and-roadmap.md` -> Epics, MVP und Release-Plan
@@ -160,8 +178,8 @@ Für dieses Projekt gilt ausdrücklich:
 
 ## Nächster Schritt
 
-Der nächste praktische Schritt ist der Start der eigentlichen Implementierung mit:
-- Projektgerüst
-- Docker-Setup
-- Datenhaltung
-- CI-Grundpipeline
+Der nächste praktische Schritt ist der Ausbau der eigentlichen Implementierung mit:
+- Docker-Setup fertigziehen
+- Datenhaltung und Prisma ergänzen
+- erste CRUD-Flows für recurring items bauen
+- CI um Docker-Build erweitern
