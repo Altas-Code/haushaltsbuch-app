@@ -20,18 +20,16 @@ Die App soll helfen:
 
 ## Status
 
-Aktuell befindet sich das Projekt in der **Produkt- und Architekturvorbereitung vor dem eigentlichen Entwicklungsstart**.
+Aktuell steht das Projekt auf dem Stand von **Release 0.1.0 Foundation**.
 
 Bereits vorhanden:
-- Vision und Scope
-- Personas und User Journey
-- Design-Prinzipien
-- funktionaler Backlog, MVP und Roadmap
-- Definition of Ready und Definition of Done
-- Projektmanagement- und Traceability-Struktur
-- Branching Strategy
+- Vision, Scope und Produktstruktur
+- Architektur-, Domain- und CI/CD-Artefakte
+- Projektgerüst mit Next.js, TypeScript und Tests
+- Docker-Betrieb
+- Prisma- und SQLite-Grundlage
 - GitHub Templates, Labels und erste MVP-Issues
-- Architektur-, Screen-, Domain- und CI/CD-Artefakte
+- Projektmanagement-, Traceability- und Branching-Grundlage
 
 ## MVP auf einen Blick
 
@@ -90,6 +88,7 @@ haushaltsbuch-app/
 │  ├─ cicd-blueprint.md
 │  ├─ roadmap.md
 │  ├─ backlog-and-roadmap.md
+│  ├─ getting-started.md
 │  ├─ mvp-issues.md
 │  ├─ definition-of-ready.md
 │  ├─ definition-of-done.md
@@ -140,6 +139,7 @@ haushaltsbuch-app/
 
 ### Planung und Delivery
 - `docs/backlog-and-roadmap.md` -> Epics, MVP und Release-Plan
+- `docs/getting-started.md` -> aktueller Start- und Betriebsweg für 0.1.0
 - `docs/mvp-issues.md` -> erste operative MVP-Issue-Liste
 - `docs/roadmap.md` -> kompakte Roadmap
 - `docs/definition-of-ready.md` -> wann ein Item startklar ist
@@ -217,8 +217,8 @@ Für dieses Projekt gilt ausdrücklich:
 
 ## Nächster Schritt
 
-Der nächste praktische Schritt ist der Ausbau der eigentlichen Implementierung mit:
-- Docker-Setup fertigziehen
-- Datenhaltung und Prisma ergänzen
-- erste CRUD-Flows für recurring items bauen
-- CI um Docker-Build erweitern
+Nach 0.1.0 ist der nächste praktische Schritt der Einstieg in **0.2.0 Core Data Entry** mit:
+- recurring items fachlich anlegen
+- Bearbeiten und Statuslogik ergänzen
+- Persistenzpfade erstmals wirklich funktional nutzen
+- die Basis-UI in echte Datenflüsse überführen
