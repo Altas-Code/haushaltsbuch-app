@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
+import { StatusActionForm } from "@/components/recurring-items/status-action-form";
 import { listRecurringItems } from "@/application/recurring-item/list-recurring-items";
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./page.module.css";
@@ -8,10 +9,11 @@ import styles from "./page.module.css";
 export default async function RecurringItemsPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ created?: string; updated?: string }>;
+  searchParams?: Promise<{ created?: string; updated?: string; status?: "active" | "paused" | "ended" | "all" }>;
 }) {
   const params = searchParams ? await searchParams : undefined;
-  const items = await listRecurringItems();
+  const selectedStatus = params?.status ?? "active";
+  const items = await listRecurringItems(selectedStatus);
 
   return (
     <AppShell>
@@ -27,6 +29,21 @@ export default async function RecurringItemsPage({
 
       {params?.created === "1" ? <p className={styles.notice}>Eintrag erfolgreich angelegt.</p> : null}
       {params?.updated === "1" ? <p className={styles.notice}>Eintrag erfolgreich aktualisiert.</p> : null}
+
+      <nav className={styles.filters}>
+        <Link className={selectedStatus === "active" ? styles.filterActive : styles.filter} href="/recurring-items?status=active">
+          Aktiv
+        </Link>
+        <Link className={selectedStatus === "paused" ? styles.filterActive : styles.filter} href="/recurring-items?status=paused">
+          Pausiert
+        </Link>
+        <Link className={selectedStatus === "ended" ? styles.filterActive : styles.filter} href="/recurring-items?status=ended">
+          Beendet
+        </Link>
+        <Link className={selectedStatus === "all" ? styles.filterActive : styles.filter} href="/recurring-items?status=all">
+          Alle
+        </Link>
+      </nav>
 
       {items.length === 0 ? (
         <section className={styles.emptyState}>
@@ -61,9 +78,15 @@ export default async function RecurringItemsPage({
                 </div>
                 <div>
                   <dt>Status</dt>
-                  <dd>{item.status}</dd>
+                  <dd><span className={styles.statusBadge}>{item.status}</span></dd>
                 </div>
               </dl>
+
+              <div className={styles.actionsRow}>
+                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="active" />
+                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="paused" />
+                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="ended" />
+              </div>
             </article>
           ))}
         </section>
