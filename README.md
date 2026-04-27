@@ -1,260 +1,167 @@
 # Haushaltsbuch App
 
-Mini-Konzept für eine kleine self-hosted Web-App zur Verwaltung von wiederkehrenden Haushaltskosten wie Abos, Versicherungen und Krediten.
+Eine kleine self-hosted Web-App für wiederkehrende Haushaltskosten wie Abos, Versicherungen, Kredite und andere feste Verpflichtungen.
+
+Die App ist bewusst **kein vollständiges Haushaltsbuch für jede Ausgabe**, sondern ein ruhiges, klares Finanz-Dashboard für wiederkehrende Belastungen mit wenig Pflegeaufwand.
 
 ## Ziel
 
-Eine schlanke Web-App, die sich auf wiederkehrende finanzielle Verpflichtungen konzentriert, statt auf vollständige Ausgabenerfassung.
+Die App soll helfen:
+- wiederkehrende Kosten zentral zu erfassen
+- monatliche und jährliche Belastungen transparent zu machen
+- nächste Fälligkeiten früh zu sehen
+- Kündigungs- und Vertragsinformationen nicht zu verlieren
+- das Ganze auf Handy und Laptop angenehm nutzbar zu halten
+- alles einfach selbst zu hosten
 
-Die Vision ist ein ruhiges, klares Finanz-Dashboard für Abos, Versicherungen, Kredite und andere Fixkosten, das mit wenig Pflegeaufwand echte Übersicht schafft.
+## Produktidee in einem Satz
 
-Die App soll:
-- auf Handy und Laptop gut nutzbar sein
-- self-hosted laufen
-- per Docker startbar sein
-- wenig Pflegeaufwand verursachen
-- später erweiterbar bleiben
+**Weniger Buchhaltung, mehr Klarheit über wiederkehrende Verpflichtungen.**
 
-## Kernidee
+## Status
 
-Nicht jede einzelne Ausgabe tracken, sondern nur planbare, wiederkehrende Kosten:
-- Abos
-- Versicherungen
-- Kredite
-- Mitgliedschaften
-- wiederkehrende Haushaltskosten
+Aktuell befindet sich das Projekt in der **Produkt- und Architekturvorbereitung vor dem eigentlichen Entwicklungsstart**.
 
-Dadurch bleibt der manuelle Aufwand niedrig, und du bekommst trotzdem einen guten Überblick über fixe Belastungen.
+Bereits vorhanden:
+- Vision und Scope
+- Personas und User Journey
+- Design-Prinzipien
+- funktionaler Backlog, MVP und Roadmap
+- Definition of Ready und Definition of Done
+- Projektmanagement- und Traceability-Struktur
+- Branching Strategy
+- GitHub Templates, Labels und erste MVP-Issues
+- Architektur-, Screen-, Domain- und CI/CD-Artefakte
 
-## MVP-Funktionsumfang
+## MVP auf einen Blick
 
-### 1. Einträge verwalten
-Jeder Eintrag enthält mindestens:
-- Name
-- Kategorie
-- Betrag
-- Intervall (monatlich, vierteljährlich, halbjährlich, jährlich)
-- nächstes Fälligkeitsdatum
-- optionaler Hinweis
-- optional Kündigungsdatum / Kündigungsfrist
-- Status (aktiv, pausiert, beendet)
+Das MVP soll können:
+- wiederkehrende Einträge anlegen, bearbeiten, pausieren und beenden
+- monatliche und jährliche Gesamtbelastung berechnen
+- nächste Fälligkeiten anzeigen
+- aktive Verpflichtungen übersichtlich listen
+- mobil und auf Desktop gut funktionieren
+- per Docker betrieben werden
 
-### 2. Übersicht
-- Summe der monatlichen Fixkosten
-- Summe der jährlichen Fixkosten
-- Umrechnung aller Intervalle auf Monatswert
-- Liste der nächsten fälligen Zahlungen
-- Hervorhebung bald fälliger Einträge
+## Tech-Stack
 
-### 3. Geräteübergreifende Nutzung
-- responsive Weboberfläche
-- Nutzung im Browser auf Laptop und Handy
-- optional später als PWA installierbar
+Geplant ist:
+- **Next.js** für App und Serverlogik
+- **React** für die UI
+- **TypeScript** für typsichere Entwicklung
+- **SQLite** als lokale Datenbank
+- **Prisma** für Schema und Migrationen
+- **Docker / Docker Compose** für Self-Hosting
+- **GitHub Actions** für CI/CD
 
-### 4. Datenhaltung
-- lokale Datenbank, zunächst SQLite
-- einfacher Backup-Pfad über Datenverzeichnis
+Mehr dazu in `docs/tech-stack.md` und `docs/architecture-overview.md`.
 
-## Nicht im MVP
+## Projektstruktur
 
-Bewusst weggelassen, um die App klein zu halten:
-- Bankanbindung
-- automatische Kontoumsatzanalyse
-- Haushaltsbudget pro Kategorie
-- OCR für Rechnungen
-- Multi-User / Rollenmodell
-- komplexe Benachrichtigungslogik
-
-## Empfohlener Tech-Stack
-
-### Variante A, pragmatisch empfohlen
-- **Frontend + Backend:** Next.js
-- **UI:** einfache Komponenten mit sauberem Mobile-First-Layout
-- **Datenbank:** SQLite
-- **ORM:** Prisma oder Drizzle
-- **Deployment:** Docker Compose
-
-Warum diese Variante:
-- schnell umsetzbar
-- ein Codebase für UI und Serverlogik
-- gut für kleine self-hosted Tools
-- später leicht erweiterbar
-
-### Alternative, noch schlanker
-- Express oder Fastify Backend
-- simples Server-rendered Frontend oder kleines React-Frontend
-- SQLite
-
-Das wäre etwas technischer im Aufbau, aber nicht unbedingt angenehmer in der Pflege.
-
-## Datenmodell, erster Entwurf
-
-### Tabelle `recurring_items`
-- `id`
-- `name`
-- `category`
-- `amount_cents`
-- `currency`
-- `interval`
-- `next_due_date`
-- `start_date`
-- `end_date` nullable
-- `cancel_by_date` nullable
-- `notes` nullable
-- `status`
-- `created_at`
-- `updated_at`
-
-### Mögliche Kategorien
-- Abo
-- Versicherung
-- Kredit
-- Wohnen
-- Mobilität
-- Gesundheit
-- Sonstiges
-
-### Intervalle
-- monthly
-- quarterly
-- semiannual
-- yearly
-
-## Wichtige Berechnungen
-
-### Monatswert
-Zur Vergleichbarkeit wird jeder Eintrag auf einen Monatswert umgerechnet:
-- monatlich = Betrag
-- vierteljährlich = Betrag / 3
-- halbjährlich = Betrag / 6
-- jährlich = Betrag / 12
-
-### Dashboard-Werte
-- monatliche Gesamtbelastung
-- jährliche Gesamtbelastung
-- nächste 30 Tage fällig
-- kündigungsrelevante Einträge
-
-## UI-Idee
-
-## Startseite / Dashboard
-- Monatsgesamtwert als große Kennzahl
-- Anzahl aktiver Verträge
-- nächste Fälligkeiten
-- eventuell Hinweis auf bald kündbare oder bald abbuchende Einträge
-
-## Listenansicht
-- alle wiederkehrenden Kosten in einer Tabelle oder Kartenliste
-- Filter nach Kategorie und Status
-- Sortierung nach nächster Fälligkeit oder Betrag
-
-## Detail / Bearbeitung
-- Formular zum Anlegen und Bearbeiten
-- Fokus auf sehr wenige Pflichtfelder
-
-## Mobile UX
-- Karten statt breiter Tabellen
-- schnelle Erfassung mit kompaktem Formular
-- große Touch-Ziele
-
-## Docker-Konzept
-
-Die App soll per Docker Compose laufen.
-
-### Geplante Services
-Für das MVP reicht zunächst **ein App-Container** plus persistentes Datenverzeichnis:
-- `app`
-- Volume für SQLite-Datei
-
-### Beispielstruktur
-- App läuft auf Port 3000
-- Datenbankdatei liegt in `/app/data`
-- Volume bindet lokales Verzeichnis für Persistenz
-
-### Beispiel `docker-compose.yml`
-```yaml
-services:
-  haushaltsbuch-app:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./data:/app/data
-    environment:
-      - NODE_ENV=production
-```
-
-### Optional später
-- Reverse Proxy davor
-- Authentifizierung
-- automatische Backups
-- Healthcheck
-- Watchtower / Updatestrategie
-
-## Verzeichnisvorschlag
+Die Struktur ist aktuell stark dokumentationsgetrieben, damit Produkt, Architektur und Delivery vor dem Bau sauber definiert sind.
 
 ```text
 haushaltsbuch-app/
 ├─ README.md
+├─ .github/
+│  ├─ ISSUE_TEMPLATE/
+│  │  ├─ bug.yml
+│  │  ├─ config.yml
+│  │  ├─ feature.yml
+│  │  └─ tech-task.yml
+│  └─ pull_request_template.md
 ├─ docs/
 │  ├─ concept.md
-│  ├─ roadmap.md
-│  ├─ docker.md
-│  ├─ tech-stack.md
 │  ├─ vision.md
 │  ├─ personas.md
 │  ├─ user-journey.md
 │  ├─ design-principles.md
+│  ├─ tech-stack.md
+│  ├─ architecture-overview.md
+│  ├─ screen-inventory.md
+│  ├─ domain-model.md
+│  ├─ docker.md
+│  ├─ cicd-blueprint.md
+│  ├─ roadmap.md
 │  ├─ backlog-and-roadmap.md
+│  ├─ mvp-issues.md
+│  ├─ definition-of-ready.md
 │  ├─ definition-of-done.md
 │  ├─ project-management-and-traceability.md
 │  ├─ traceability-matrix.md
 │  ├─ branching-strategy.md
-│  ├─ github-labels.md
-│  ├─ mvp-issues.md
-│  ├─ architecture-overview.md
-│  ├─ screen-inventory.md
-│  ├─ domain-model.md
-│  ├─ cicd-blueprint.md
-│  └─ definition-of-ready.md
-├─ app/
-│  ├─ frontend/
-│  └─ backend/
-├─ data/
-└─ docker-compose.yml
+│  └─ github-labels.md
+├─ docker-compose.yml
+└─ .gitignore
 ```
 
-Für den Start reicht aber erst einmal die Dokumentation und danach der eigentliche App-Bau.
+## Wo finde ich was?
 
-## Roadmap
+### Produkt und Richtung
+- `docs/vision.md` -> Produktvision und Leitidee
+- `docs/concept.md` -> Grundkonzept und Produktziel
+- `docs/personas.md` -> Zielnutzer und ihre Bedürfnisse
+- `docs/user-journey.md` -> User Journey und Use Cases
+- `docs/design-principles.md` -> Look, Feeling und UX-Grundsätze
 
-### Phase 1, Konzept
-- Anforderungen festziehen
-- Datenmodell definieren
-- UI grob skizzieren
-- Docker-Zielbild festhalten
+### Architektur und technische Grundlage
+- `docs/tech-stack.md` -> Stack-Entscheidungen und Begründung
+- `docs/architecture-overview.md` -> Zielarchitektur und Schichten
+- `docs/domain-model.md` -> Fachobjekte, Felder und Regeln
+- `docs/screen-inventory.md` -> Screen-Übersicht und Informationsarchitektur
+- `docs/docker.md` -> Docker-Zielbild und Betrieb
+- `docs/cicd-blueprint.md` -> CI/CD-Zielbild und Pipeline-Anforderungen
 
-### Phase 2, MVP bauen
-- Grundgerüst erstellen
-- SQLite anbinden
-- CRUD für Einträge
-- Dashboard mit Summen und Fälligkeiten
-- responsive UI
-- Dockerfile + Compose
+### Planung und Delivery
+- `docs/backlog-and-roadmap.md` -> Epics, MVP und Release-Plan
+- `docs/mvp-issues.md` -> erste operative MVP-Issue-Liste
+- `docs/roadmap.md` -> kompakte Roadmap
+- `docs/definition-of-ready.md` -> wann ein Item startklar ist
+- `docs/definition-of-done.md` -> wann ein Item wirklich fertig ist
 
-### Phase 3, Komfortfunktionen
-- Erinnerungen
-- PWA
-- CSV-Export
-- Anhänge / Vertragsnotizen
-- einfache Auth
+### Projektmanagement und Nachvollziehbarkeit
+- `docs/project-management-and-traceability.md` -> Statusmodell und PM-Struktur
+- `docs/traceability-matrix.md` -> Verknüpfung von Backlog, Use Cases und Releases
+- `docs/branching-strategy.md` -> Branch-Modell und Merge-Regeln
+- `docs/github-labels.md` -> Label-System für GitHub
 
-## Meine Empfehlung
+### GitHub-Workflow
+- `.github/ISSUE_TEMPLATE/` -> Templates für Features, Bugs und Tech Tasks
+- `.github/pull_request_template.md` -> PR-Checkliste mit DoD-/CI-Fokus
 
-Für deinen Fall lohnt sich eine eigene kleine App dann, wenn du:
-- die Daten bewusst einfach halten willst
-- keine Bankanbindung brauchst
-- selbst hosten möchtest
-- lieber ein passendes kleines Tool als eine überladene Budget-App hast
+## Geplante Entwicklungsreihenfolge
 
-Wenn wir das wirklich bauen, würde ich mit einem **sehr kleinen MVP** starten und erst danach Extras ergänzen.
+Die ersten Arbeitspakete sind:
+1. `HB-001` Projektgerüst anlegen
+2. `HB-002` Docker-Betrieb ermöglichen
+3. `HB-003` Persistente Datenhaltung einrichten
+4. `HB-004` Basis-Konfiguration dokumentieren
+
+Danach folgen die ersten funktionalen Features rund um wiederkehrende Einträge und das Dashboard.
+
+## Geplante Releases
+
+- `0.1.0` Foundation
+- `0.2.0` Core Data Entry
+- `0.3.0` First Useful Dashboard
+- `1.0.0` MVP
+- danach schrittweise Komfortfunktionen
+
+Mehr Details in `docs/backlog-and-roadmap.md`.
+
+## Qualitätsanspruch
+
+Für dieses Projekt gilt ausdrücklich:
+- kein "done" ohne Architektur, Tests, Integration und Doku
+- CI/CD ist Pflicht und kein Nachgedanke
+- `main` bleibt releasefähig
+- Docker-Betrieb ist Teil des Produktziels
+- Änderungen müssen rückverfolgbar und sauber reviewbar sein
+
+## Nächster Schritt
+
+Der nächste praktische Schritt ist der Start der eigentlichen Implementierung mit:
+- Projektgerüst
+- Docker-Setup
+- Datenhaltung
+- CI-Grundpipeline
