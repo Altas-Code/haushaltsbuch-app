@@ -80,6 +80,7 @@ haushaltsbuch-app/
 │  ├─ design-principles.md
 │  ├─ tech-stack.md
 │  ├─ architecture-overview.md
+│  ├─ software-architecture.md
 │  ├─ screen-inventory.md
 │  ├─ domain-model.md
 │  ├─ docker.md
@@ -121,6 +122,7 @@ haushaltsbuch-app/
 ### Architektur und technische Grundlage
 - `docs/tech-stack.md` -> Stack-Entscheidungen und Begründung
 - `docs/architecture-overview.md` -> Zielarchitektur und Schichten
+- `docs/software-architecture.md` -> eigentliche Softwarearchitektur mit Bausteinen, Laufzeit- und Schichtenregeln
 - `docs/domain-model.md` -> Fachobjekte, Felder und Regeln
 - `docs/screen-inventory.md` -> Screen-Übersicht und Informationsarchitektur
 - `docs/docker.md` -> Docker-Zielbild und Betrieb
