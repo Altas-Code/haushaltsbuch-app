@@ -155,6 +155,30 @@ haushaltsbuch-app/
 - `.github/ISSUE_TEMPLATE/` -> Templates für Features, Bugs und Tech Tasks
 - `.github/pull_request_template.md` -> PR-Checkliste mit DoD-/CI-Fokus
 
+## Lokaler Start
+
+### Entwicklung
+```bash
+npm install
+npm run dev
+```
+
+### Qualitätschecks
+```bash
+npm run lint
+npm run typecheck
+npm run test:unit
+npm run test:integration
+npm run build
+```
+
+### Docker
+```bash
+docker compose up --build
+```
+
+Die App läuft dann unter `http://localhost:3000`.
+
 ## Geplante Entwicklungsreihenfolge
 
 Die ersten Arbeitspakete sind:

@@ -1,11 +1,14 @@
 services:
   haushaltsbuch-app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: haushaltsbuch-app
     ports:
       - "3000:3000"
     environment:
       NODE_ENV: production
+      PORT: 3000
       DATABASE_URL: file:/app/data/haushaltsbuch.db
     volumes:
       - ./data:/app/data
