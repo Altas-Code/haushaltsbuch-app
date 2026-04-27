@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum RecurringInterval {
+  monthly
+  quarterly
+  semiannual
+  yearly
+}
+
+enum RecurringItemStatus {
+  active
+  paused
+  ended
+}
+
+enum RecurringItemCategory {
+  subscription
+  insurance
+  loan
+  housing
+  mobility
+  health
+  other
+}
+
+model RecurringItem {
+  id           String                @id @default(cuid())
+  name         String
+  amountCents  Int
+  currency     String                @default("EUR")
+  interval     RecurringInterval
+  nextDueDate  DateTime
+  category     RecurringItemCategory?
+  notes        String?
+  startDate    DateTime?
+  endDate      DateTime?
+  cancelByDate DateTime?
+  status       RecurringItemStatus   @default(active)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+}

@@ -159,12 +159,15 @@ haushaltsbuch-app/
 
 ### Entwicklung
 ```bash
+cp .env.example .env
 npm install
+npm run prisma:generate
 npm run dev
 ```
 
 ### Qualitätschecks
 ```bash
+npm run prisma:generate
 npm run lint
 npm run typecheck
 npm run test:unit
@@ -178,6 +181,10 @@ docker compose up --build
 ```
 
 Die App läuft dann unter `http://localhost:3000`.
+
+Die persistente SQLite-Datei liegt lokal unter `./data/haushaltsbuch.db` und im Container unter `/app/data/haushaltsbuch.db`.
+
+Migrationen liegen unter `prisma/migrations/` und werden im Container beim Start mit `prisma migrate deploy` angewendet.
 
 ## Geplante Entwicklungsreihenfolge
 
