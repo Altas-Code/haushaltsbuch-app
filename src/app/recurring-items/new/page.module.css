@@ -1,0 +1,33 @@
+.intro {
+  margin-bottom: 20px;
+}
+
+.intro h2 {
+  margin: 0 0 8px;
+  font-size: 1.6rem;
+}
+
+.intro p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.notice {
+  margin: 0 0 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ecfdf3;
+  border: 1px solid #abefc6;
+  color: #067647;
+  font-weight: 600;
+}
+
+.actions {
+  margin-top: 18px;
+}
+
+.backLink {
+  color: var(--accent);
+  font-weight: 600;
+}

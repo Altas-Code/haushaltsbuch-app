@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import styles from "./create-recurring-item-form.module.css";
 
@@ -22,6 +23,7 @@ const categoryOptions = [
 ] as const;
 
 export function CreateRecurringItemForm() {
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,6 +57,8 @@ export function CreateRecurringItemForm() {
 
     setSuccess("Eintrag gespeichert.");
     setIsSubmitting(false);
+    router.push("/recurring-items?created=1");
+    router.refresh();
   }
 
   return (
