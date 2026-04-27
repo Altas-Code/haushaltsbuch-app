@@ -79,6 +79,7 @@ haushaltsbuch-app/
 │  ├─ user-journey.md
 │  ├─ design-principles.md
 │  ├─ tech-stack.md
+│  ├─ architecture-index.md
 │  ├─ architecture-overview.md
 │  ├─ software-architecture.md
 │  ├─ c4-architecture-view.md
@@ -122,9 +123,10 @@ haushaltsbuch-app/
 - `docs/design-principles.md` -> Look, Feeling und UX-Grundsätze
 
 ### Architektur und technische Grundlage
+- `docs/architecture-index.md` -> Einstiegspunkt und Konsolidierung der gesamten Architektur-Doku
 - `docs/tech-stack.md` -> Stack-Entscheidungen und Begründung
 - `docs/architecture-overview.md` -> Zielarchitektur und Schichten
-- `docs/software-architecture.md` -> eigentliche Softwarearchitektur mit Bausteinen, Laufzeit- und Schichtenregeln
+- `docs/software-architecture.md` -> führendes Hauptdokument der Softwarearchitektur
 - `docs/c4-architecture-view.md` -> kompakte C4-Sicht mit Context, Container und Component View
 - `docs/architecture-diagrams.md` -> Mermaid-Diagramme für System, Container, Komponenten und Use Cases
 - `docs/domain-model.md` -> Fachobjekte, Felder und Regeln
