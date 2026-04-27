@@ -211,7 +211,12 @@ haushaltsbuch-app/
 │  ├─ traceability-matrix.md
 │  ├─ branching-strategy.md
 │  ├─ github-labels.md
-│  └─ mvp-issues.md
+│  ├─ mvp-issues.md
+│  ├─ architecture-overview.md
+│  ├─ screen-inventory.md
+│  ├─ domain-model.md
+│  ├─ cicd-blueprint.md
+│  └─ definition-of-ready.md
 ├─ app/
 │  ├─ frontend/
 │  └─ backend/
