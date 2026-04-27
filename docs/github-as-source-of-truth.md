@@ -7,7 +7,6 @@ Dieses Projekt nutzt GitHub ab sofort als **Single Source of Truth** für die op
 Operative Informationen werden nicht mehr primär in Markdown-Backlogs oder PM-Dokumenten im Repository gepflegt, sondern in GitHub:
 - Issues
 - Labels
-- Status
 - Releases
 - Release Notes
 - Pull Requests
@@ -43,6 +42,10 @@ Ab jetzt gilt:
 - **GitHub Issues** = Backlog und Umsetzungsstand
 - **GitHub Labels** = Status, Priorität, Bereich, Release-Zuordnung
 - **GitHub Releases** = veröffentlichte Stände und Release Notes
+
+## Projects
+
+GitHub Projects sind für dieses Projekt **optional** und nicht Teil der verbindlichen Pflege. Wenn ein Project existiert, ist es nur eine zusätzliche Ansicht, aber nicht die operative Wahrheit.
 
 ## Pflegeprinzip
 

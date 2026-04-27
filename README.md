@@ -20,12 +20,13 @@ Die App soll helfen:
 
 ## Status
 
-Das Projekt wird **operativ über GitHub gesteuert**.
+Das Projekt wird **operativ über GitHub Issues gesteuert**.
 
 Das bedeutet:
-- GitHub Issues sind der Backlog
+- GitHub Issues sind der Backlog und der Arbeitsstand
 - GitHub Labels tragen Status, Priorität, Bereich und Release-Zuordnung
 - GitHub Releases bilden veröffentlichte Stände ab
+- GitHub Projects sind höchstens optionaler Zusatz, aber nicht führend
 
 Die Markdown-Dokumentation im Repository beschreibt weiterhin Produkt, Architektur, Qualitätsregeln und Setup, ist aber **nicht mehr die führende Quelle für den laufenden Umsetzungsstand**.
 
@@ -140,6 +141,7 @@ haushaltsbuch-app/
 - GitHub Issues -> Backlog und Arbeitsstand
 - GitHub Labels -> Status, Priorität, Bereich und Release-Zuordnung
 - GitHub Releases -> veröffentlichte Stände und Release Notes
+- GitHub Projects -> optional, nicht führend
 - `docs/github-as-source-of-truth.md` -> erklärt das Steuerungsmodell
 - `docs/planning-archive.md` -> markiert ältere PM-/Backlog-Dokumente als historisch
 - `docs/branching-strategy.md` -> Branch-Modell und Merge-Regeln
@@ -183,10 +185,12 @@ Migrationen liegen unter `prisma/migrations/` und werden im Container beim Start
 
 ## Planung und Releases
 
-Die operative Planung liegt in GitHub:
+Die operative Planung liegt in GitHub Issues:
 - Issues für Backlog und Fortschritt
 - Labels für Status und Priorität
 - Releases für veröffentlichte Stände
+
+GitHub Projects sind optional und nicht Teil der verbindlichen Pflege.
 
 Ältere Markdown-Planungsdateien bleiben nur als historische Referenz erhalten und sind nicht mehr die führende Quelle.
 
