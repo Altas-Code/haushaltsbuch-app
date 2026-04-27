@@ -20,16 +20,14 @@ Die App soll helfen:
 
 ## Status
 
-Aktuell steht das Projekt auf dem Stand von **Release 0.1.0 Foundation**.
+Das Projekt wird **operativ über GitHub gesteuert**.
 
-Bereits vorhanden:
-- Vision, Scope und Produktstruktur
-- Architektur-, Domain- und CI/CD-Artefakte
-- Projektgerüst mit Next.js, TypeScript und Tests
-- Docker-Betrieb
-- Prisma- und SQLite-Grundlage
-- GitHub Templates, Labels und erste MVP-Issues
-- Projektmanagement-, Traceability- und Branching-Grundlage
+Das bedeutet:
+- GitHub Issues sind der Backlog
+- GitHub Labels tragen Status, Priorität, Bereich und Release-Zuordnung
+- GitHub Releases bilden veröffentlichte Stände ab
+
+Die Markdown-Dokumentation im Repository beschreibt weiterhin Produkt, Architektur, Qualitätsregeln und Setup, ist aber **nicht mehr die führende Quelle für den laufenden Umsetzungsstand**.
 
 ## MVP auf einen Blick
 
@@ -55,8 +53,6 @@ Geplant ist:
 Mehr dazu in `docs/tech-stack.md` und `docs/architecture-overview.md`.
 
 ## Projektstruktur
-
-Die Struktur ist aktuell stark dokumentationsgetrieben, damit Produkt, Architektur und Delivery vor dem Bau sauber definiert sind.
 
 ```text
 haushaltsbuch-app/
@@ -86,20 +82,20 @@ haushaltsbuch-app/
 │  ├─ domain-model.md
 │  ├─ docker.md
 │  ├─ cicd-blueprint.md
-│  ├─ roadmap.md
-│  ├─ backlog-and-roadmap.md
 │  ├─ getting-started.md
-│  ├─ mvp-issues.md
+│  ├─ github-as-source-of-truth.md
+│  ├─ planning-archive.md
 │  ├─ definition-of-ready.md
 │  ├─ definition-of-done.md
-│  ├─ project-management-and-traceability.md
-│  ├─ traceability-matrix.md
-│  ├─ branching-strategy.md
-│  └─ github-labels.md
+│  └─ branching-strategy.md
 ├─ src/
 │  ├─ app/
+│  ├─ application/
 │  ├─ components/
-│  └─ domain/
+│  ├─ domain/
+│  ├─ generated/
+│  └─ lib/
+├─ prisma/
 ├─ tests/
 │  ├─ unit/
 │  └─ integration/
@@ -108,6 +104,7 @@ haushaltsbuch-app/
 ├─ next.config.ts
 ├─ vitest.config.ts
 ├─ docker-compose.yml
+├─ Dockerfile
 ├─ .dockerignore
 └─ .gitignore
 ```
@@ -122,7 +119,7 @@ haushaltsbuch-app/
 - `docs/design-principles.md` -> Look, Feeling und UX-Grundsätze
 
 ### Architektur und technische Grundlage
-- `docs/architecture-index.md` -> Einstiegspunkt und Konsolidierung der gesamten Architektur-Doku
+- `docs/architecture-index.md` -> Einstiegspunkt und Konsolidierung der Architektur-Doku
 - `docs/tech-stack.md` -> Stack-Entscheidungen und Begründung
 - `docs/architecture-overview.md` -> Zielarchitektur und Schichten
 - `docs/software-architecture.md` -> führendes Hauptdokument der Softwarearchitektur
@@ -132,24 +129,22 @@ haushaltsbuch-app/
 - `docs/screen-inventory.md` -> Screen-Übersicht und Informationsarchitektur
 - `docs/docker.md` -> Docker-Zielbild und Betrieb
 - `docs/cicd-blueprint.md` -> CI/CD-Zielbild und Pipeline-Anforderungen
-- `src/app/` -> Next.js App Router, Layout und Einstiegspunkte
-- `src/components/` -> UI-Bausteine und Seitenkomposition
-- `src/domain/` -> fachliche Logik wie Berechnungen und Regeln
+- `src/app/` -> Next.js App Router und Routen
+- `src/application/` -> Use Cases und Anwendungslogik
+- `src/components/` -> UI-Bausteine und Formulare
+- `src/domain/` -> fachliche Regeln und Modelle
+- `src/lib/` -> DB, Config und Utilities
 - `tests/` -> Unit- und Integrationstests
 
-### Planung und Delivery
-- `docs/backlog-and-roadmap.md` -> Epics, MVP und Release-Plan
-- `docs/getting-started.md` -> aktueller Start- und Betriebsweg für 0.1.0
-- `docs/mvp-issues.md` -> erste operative MVP-Issue-Liste
-- `docs/roadmap.md` -> kompakte Roadmap
+### Operative Steuerung
+- GitHub Issues -> Backlog und Arbeitsstand
+- GitHub Labels -> Status, Priorität, Bereich und Release-Zuordnung
+- GitHub Releases -> veröffentlichte Stände und Release Notes
+- `docs/github-as-source-of-truth.md` -> erklärt das Steuerungsmodell
+- `docs/planning-archive.md` -> markiert ältere PM-/Backlog-Dokumente als historisch
+- `docs/branching-strategy.md` -> Branch-Modell und Merge-Regeln
 - `docs/definition-of-ready.md` -> wann ein Item startklar ist
 - `docs/definition-of-done.md` -> wann ein Item wirklich fertig ist
-
-### Projektmanagement und Nachvollziehbarkeit
-- `docs/project-management-and-traceability.md` -> Statusmodell und PM-Struktur
-- `docs/traceability-matrix.md` -> Verknüpfung von Backlog, Use Cases und Releases
-- `docs/branching-strategy.md` -> Branch-Modell und Merge-Regeln
-- `docs/github-labels.md` -> Label-System für GitHub
 
 ### GitHub-Workflow
 - `.github/ISSUE_TEMPLATE/` -> Templates für Features, Bugs und Tech Tasks
@@ -186,25 +181,14 @@ Die persistente SQLite-Datei liegt lokal unter `./data/haushaltsbuch.db` und im 
 
 Migrationen liegen unter `prisma/migrations/` und werden im Container beim Start mit `prisma migrate deploy` angewendet.
 
-## Geplante Entwicklungsreihenfolge
+## Planung und Releases
 
-Die ersten Arbeitspakete sind:
-1. `HB-001` Projektgerüst anlegen
-2. `HB-002` Docker-Betrieb ermöglichen
-3. `HB-003` Persistente Datenhaltung einrichten
-4. `HB-004` Basis-Konfiguration dokumentieren
+Die operative Planung liegt in GitHub:
+- Issues für Backlog und Fortschritt
+- Labels für Status und Priorität
+- Releases für veröffentlichte Stände
 
-Danach folgen die ersten funktionalen Features rund um wiederkehrende Einträge und das Dashboard.
-
-## Geplante Releases
-
-- `0.1.0` Foundation
-- `0.2.0` Core Data Entry
-- `0.3.0` First Useful Dashboard
-- `1.0.0` MVP
-- danach schrittweise Komfortfunktionen
-
-Mehr Details in `docs/backlog-and-roadmap.md`.
+Ältere Markdown-Planungsdateien bleiben nur als historische Referenz erhalten und sind nicht mehr die führende Quelle.
 
 ## Qualitätsanspruch
 
@@ -217,8 +201,4 @@ Für dieses Projekt gilt ausdrücklich:
 
 ## Nächster Schritt
 
-Nach 0.1.0 ist der nächste praktische Schritt der Einstieg in **0.2.0 Core Data Entry** mit:
-- recurring items fachlich anlegen
-- Bearbeiten und Statuslogik ergänzen
-- Persistenzpfade erstmals wirklich funktional nutzen
-- die Basis-UI in echte Datenflüsse überführen
+Der nächste operative Schritt wird in GitHub geplant und dort weitergeführt. Die technische und fachliche Grundlage dafür liegt im Repository bereits bereit.
