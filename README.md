@@ -86,6 +86,7 @@ haushaltsbuch-app/
 │  ├─ getting-started.md
 │  ├─ github-as-source-of-truth.md
 │  ├─ planning-archive.md
+│  ├─ mvp-decisions.md
 │  ├─ definition-of-ready.md
 │  ├─ definition-of-done.md
 │  └─ branching-strategy.md
@@ -118,6 +119,7 @@ haushaltsbuch-app/
 - `docs/personas.md` -> Zielnutzer und ihre Bedürfnisse
 - `docs/user-journey.md` -> User Journey und Use Cases
 - `docs/design-principles.md` -> Look, Feeling und UX-Grundsätze
+- `docs/mvp-decisions.md` -> festgezurrte MVP-Produktentscheidungen
 
 ### Architektur und technische Grundlage
 - `docs/architecture-index.md` -> Einstiegspunkt und Konsolidierung der Architektur-Doku
@@ -151,6 +153,9 @@ haushaltsbuch-app/
 ### GitHub-Workflow
 - `.github/ISSUE_TEMPLATE/` -> Templates für Features, Bugs und Tech Tasks
 - `.github/pull_request_template.md` -> PR-Checkliste mit DoD-/CI-Fokus
+
+### Zusätzliche lokale Skills
+- `../skills/grill-me/SKILL.md` -> übernommener Skill zum harten Durchfragen und Stress-Testen von Plänen
 
 ## Lokaler Start
 
