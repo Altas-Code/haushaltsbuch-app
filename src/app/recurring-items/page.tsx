@@ -8,7 +8,7 @@ import styles from "./page.module.css";
 export default async function RecurringItemsPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ created?: string }>;
+  searchParams?: Promise<{ created?: string; updated?: string }>;
 }) {
   const params = searchParams ? await searchParams : undefined;
   const items = await listRecurringItems();
@@ -26,6 +26,7 @@ export default async function RecurringItemsPage({
       </section>
 
       {params?.created === "1" ? <p className={styles.notice}>Eintrag erfolgreich angelegt.</p> : null}
+      {params?.updated === "1" ? <p className={styles.notice}>Eintrag erfolgreich aktualisiert.</p> : null}
 
       {items.length === 0 ? (
         <section className={styles.emptyState}>
@@ -36,9 +37,14 @@ export default async function RecurringItemsPage({
         <section className={styles.list}>
           {items.map((item) => (
             <article className={styles.card} key={item.id}>
-              <div>
-                <h3>{item.name}</h3>
-                <p>{item.category ?? "ohne Kategorie"}</p>
+              <div className={styles.cardHeader}>
+                <div>
+                  <h3>{item.name}</h3>
+                  <p>{item.category ?? "ohne Kategorie"}</p>
+                </div>
+                <Link className={styles.editLink} href={`/recurring-items/${item.id}/edit`}>
+                  Bearbeiten
+                </Link>
               </div>
               <dl>
                 <div>
