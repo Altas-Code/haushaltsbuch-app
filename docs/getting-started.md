@@ -152,8 +152,11 @@ Noch nicht enthalten:
 
 # 9. Bekannte technische Hinweise
 
-## Next.js Version
-Die aktuell verwendete Next.js-Version meldet eine bekannte Sicherheitswarnung. Diese sollte in einer der nächsten technischen Iterationen auf eine gepatchte Version gehoben werden.
+## Next.js und Linting
+Die Next.js-Version wurde auf einen aktuellen 15.5.x-Stand gehoben, um die bekannte Warnung der frühen 15.3.x-Linie zu verlassen.
+
+Hinweis:
+`next lint` ist in Richtung Next.js 16 als veraltet markiert. Für eine spätere Iteration sollte die Pipeline auf die direkte ESLint-CLI umgestellt werden.
 
 ## Docker-Zugriff lokal
 Für lokale Docker-Kommandos muss der ausführende Benutzer Zugriff auf den Docker-Socket haben.
