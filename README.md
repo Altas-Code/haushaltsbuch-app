@@ -81,6 +81,7 @@ haushaltsbuch-app/
 │  ├─ tech-stack.md
 │  ├─ architecture-overview.md
 │  ├─ software-architecture.md
+│  ├─ c4-architecture-view.md
 │  ├─ screen-inventory.md
 │  ├─ domain-model.md
 │  ├─ docker.md
@@ -123,6 +124,7 @@ haushaltsbuch-app/
 - `docs/tech-stack.md` -> Stack-Entscheidungen und Begründung
 - `docs/architecture-overview.md` -> Zielarchitektur und Schichten
 - `docs/software-architecture.md` -> eigentliche Softwarearchitektur mit Bausteinen, Laufzeit- und Schichtenregeln
+- `docs/c4-architecture-view.md` -> kompakte C4-Sicht mit Context, Container und Component View
 - `docs/domain-model.md` -> Fachobjekte, Felder und Regeln
 - `docs/screen-inventory.md` -> Screen-Übersicht und Informationsarchitektur
 - `docs/docker.md` -> Docker-Zielbild und Betrieb
