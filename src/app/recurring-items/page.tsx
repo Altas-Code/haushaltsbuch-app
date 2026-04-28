@@ -2,18 +2,24 @@ import React from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { StatusActionForm } from "@/components/recurring-items/status-action-form";
-import { listRecurringItems } from "@/application/recurring-item/list-recurring-items";
+import { listRecurringItems, type RecurringItemSort } from "@/application/recurring-item/list-recurring-items";
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./page.module.css";
 
 export default async function RecurringItemsPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ created?: string; updated?: string; status?: "active" | "paused" | "ended" | "all" }>;
+  searchParams?: Promise<{
+    created?: string;
+    updated?: string;
+    status?: "active" | "paused" | "ended" | "all";
+    sort?: RecurringItemSort;
+  }>;
 }) {
   const params = searchParams ? await searchParams : undefined;
   const selectedStatus = params?.status ?? "active";
-  const items = await listRecurringItems(selectedStatus);
+  const selectedSort = params?.sort ?? "dueDateAsc";
+  const items = await listRecurringItems(selectedStatus, selectedSort);
 
   return (
     <AppShell>
@@ -30,20 +36,49 @@ export default async function RecurringItemsPage({
       {params?.created === "1" ? <p className={styles.notice}>Eintrag erfolgreich angelegt.</p> : null}
       {params?.updated === "1" ? <p className={styles.notice}>Eintrag erfolgreich aktualisiert.</p> : null}
 
-      <nav className={styles.filters}>
-        <Link className={selectedStatus === "active" ? styles.filterActive : styles.filter} href="/recurring-items?status=active">
-          Aktiv
-        </Link>
-        <Link className={selectedStatus === "paused" ? styles.filterActive : styles.filter} href="/recurring-items?status=paused">
-          Pausiert
-        </Link>
-        <Link className={selectedStatus === "ended" ? styles.filterActive : styles.filter} href="/recurring-items?status=ended">
-          Beendet
-        </Link>
-        <Link className={selectedStatus === "all" ? styles.filterActive : styles.filter} href="/recurring-items?status=all">
-          Alle
-        </Link>
-      </nav>
+      <div className={styles.toolbar}>
+        <nav className={styles.filters}>
+          <Link
+            className={selectedStatus === "active" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=active&sort=${selectedSort}`}
+          >
+            Aktiv
+          </Link>
+          <Link
+            className={selectedStatus === "paused" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=paused&sort=${selectedSort}`}
+          >
+            Pausiert
+          </Link>
+          <Link
+            className={selectedStatus === "ended" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=ended&sort=${selectedSort}`}
+          >
+            Beendet
+          </Link>
+          <Link
+            className={selectedStatus === "all" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=all&sort=${selectedSort}`}
+          >
+            Alle
+          </Link>
+        </nav>
+
+        <nav className={styles.filters} aria-label="Sortierung nach Fälligkeit">
+          <Link
+            className={selectedSort === "dueDateAsc" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=${selectedStatus}&sort=dueDateAsc`}
+          >
+            Fällig zuerst
+          </Link>
+          <Link
+            className={selectedSort === "dueDateDesc" ? styles.filterActive : styles.filter}
+            href={`/recurring-items?status=${selectedStatus}&sort=dueDateDesc`}
+          >
+            Später zuerst
+          </Link>
+        </nav>
+      </div>
 
       {items.length === 0 ? (
         <section className={styles.emptyState}>

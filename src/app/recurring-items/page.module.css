@@ -38,11 +38,16 @@
   font-weight: 600;
 }
 
+.toolbar {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
 .filters {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-bottom: 16px;
 }
 
 .filter,
