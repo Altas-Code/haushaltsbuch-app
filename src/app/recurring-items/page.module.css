@@ -16,16 +16,25 @@
   color: var(--text-muted);
 }
 
-.cta {
+.cta,
+.ctaSecondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 44px;
   padding: 0 16px;
   border-radius: 999px;
+  font-weight: 700;
+}
+
+.cta {
   background: var(--accent);
   color: white;
-  font-weight: 700;
+}
+
+.ctaSecondary {
+  background: var(--accent);
+  color: white;
 }
 
 .notice {
@@ -75,6 +84,34 @@
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
+}
+
+.emptyState {
+  display: grid;
+  gap: 12px;
+}
+
+.emptyEyebrow {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.emptyActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.secondaryLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .list {

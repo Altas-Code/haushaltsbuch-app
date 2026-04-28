@@ -10,6 +10,34 @@ import {
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./page.module.css";
 
+function getEmptyStateContent(status: string, category: RecurringItemCategoryFilter) {
+  if (status === "paused") {
+    return {
+      title: "Keine pausierten Einträge gefunden",
+      copy: "Zurzeit gibt es in dieser Auswahl keine pausierten Fixkosten. Wechsle den Status oder lege neue Einträge an.",
+    };
+  }
+
+  if (status === "ended") {
+    return {
+      title: "Keine beendeten Einträge gefunden",
+      copy: "In dieser Auswahl gibt es noch keine beendeten Einträge. Über den Statuswechsel tauchen sie später hier wieder auf.",
+    };
+  }
+
+  if (category !== "all") {
+    return {
+      title: "Keine Einträge für diese Kategorie",
+      copy: "In der aktuellen Kombination aus Status, Sortierung und Kategorie wurde nichts gefunden. Passe die Filter an oder lege einen passenden Eintrag an.",
+    };
+  }
+
+  return {
+    title: "Noch keine Einträge",
+    copy: "Lege deinen ersten wiederkehrenden Eintrag an, um die App mit echten Daten zu füllen.",
+  };
+}
+
 const categoryFilters: { value: RecurringItemCategoryFilter; label: string }[] = [
   { value: "all", label: "Alle Kategorien" },
   { value: "subscription", label: "Abo" },
@@ -38,6 +66,7 @@ export default async function RecurringItemsPage({
   const selectedSort = params?.sort ?? "dueDateAsc";
   const selectedCategory = params?.category ?? "all";
   const items = await listRecurringItems(selectedStatus, selectedSort, selectedCategory);
+  const emptyState = getEmptyStateContent(selectedStatus, selectedCategory);
 
   return (
     <AppShell>
@@ -112,8 +141,17 @@ export default async function RecurringItemsPage({
 
       {items.length === 0 ? (
         <section className={styles.emptyState}>
-          <h3>Noch keine Einträge</h3>
-          <p>Lege deinen ersten wiederkehrenden Eintrag an, um die App mit echten Daten zu füllen.</p>
+          <p className={styles.emptyEyebrow}>Nichts in dieser Auswahl</p>
+          <h3>{emptyState.title}</h3>
+          <p>{emptyState.copy}</p>
+          <div className={styles.emptyActions}>
+            <Link className={styles.ctaSecondary} href="/recurring-items/new">
+              Neuen Eintrag anlegen
+            </Link>
+            <Link className={styles.secondaryLink} href="/recurring-items?status=active&sort=dueDateAsc&category=all">
+              Filter zurücksetzen
+            </Link>
+          </div>
         </section>
       ) : (
         <section className={styles.list}>

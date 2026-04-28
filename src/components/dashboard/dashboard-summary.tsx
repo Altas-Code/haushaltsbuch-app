@@ -52,7 +52,14 @@ export function DashboardSummary({ summary }: { summary: AwaitedDashboardSummary
 
         {summary.upcomingDueItems.length === 0 ? (
           <div className={styles.emptyState}>
-            <p>Noch keine aktiven Einträge. Lege deinen ersten Fixkosten-Eintrag an.</p>
+            <p className={styles.emptyEyebrow}>Noch leer</p>
+            <h4>Dein Dashboard füllt sich mit dem ersten Eintrag</h4>
+            <p>
+              Sobald du einen wiederkehrenden Fixkosten-Eintrag anlegst, erscheinen hier Monatsschnitt, Fälligkeiten und dein aktueller Überblick.
+            </p>
+            <Link className={styles.inlineCta} href="/recurring-items/new">
+              Jetzt ersten Eintrag anlegen
+            </Link>
           </div>
         ) : (
           <div className={styles.upcomingList}>
