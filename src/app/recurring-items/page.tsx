@@ -2,9 +2,25 @@ import React from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { StatusActionForm } from "@/components/recurring-items/status-action-form";
-import { listRecurringItems, type RecurringItemSort } from "@/application/recurring-item/list-recurring-items";
+import {
+  listRecurringItems,
+  type RecurringItemCategoryFilter,
+  type RecurringItemSort,
+} from "@/application/recurring-item/list-recurring-items";
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./page.module.css";
+
+const categoryFilters: { value: RecurringItemCategoryFilter; label: string }[] = [
+  { value: "all", label: "Alle Kategorien" },
+  { value: "subscription", label: "Abo" },
+  { value: "insurance", label: "Versicherung" },
+  { value: "loan", label: "Kredit" },
+  { value: "housing", label: "Wohnen" },
+  { value: "mobility", label: "Mobilität" },
+  { value: "health", label: "Gesundheit" },
+  { value: "other", label: "Sonstiges" },
+  { value: "uncategorized", label: "Ohne Kategorie" },
+];
 
 export default async function RecurringItemsPage({
   searchParams,
@@ -14,12 +30,14 @@ export default async function RecurringItemsPage({
     updated?: string;
     status?: "active" | "paused" | "ended" | "all";
     sort?: RecurringItemSort;
+    category?: RecurringItemCategoryFilter;
   }>;
 }) {
   const params = searchParams ? await searchParams : undefined;
   const selectedStatus = params?.status ?? "active";
   const selectedSort = params?.sort ?? "dueDateAsc";
-  const items = await listRecurringItems(selectedStatus, selectedSort);
+  const selectedCategory = params?.category ?? "all";
+  const items = await listRecurringItems(selectedStatus, selectedSort, selectedCategory);
 
   return (
     <AppShell>
@@ -40,25 +58,25 @@ export default async function RecurringItemsPage({
         <nav className={styles.filters}>
           <Link
             className={selectedStatus === "active" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=active&sort=${selectedSort}`}
+            href={`/recurring-items?status=active&sort=${selectedSort}&category=${selectedCategory}`}
           >
             Aktiv
           </Link>
           <Link
             className={selectedStatus === "paused" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=paused&sort=${selectedSort}`}
+            href={`/recurring-items?status=paused&sort=${selectedSort}&category=${selectedCategory}`}
           >
             Pausiert
           </Link>
           <Link
             className={selectedStatus === "ended" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=ended&sort=${selectedSort}`}
+            href={`/recurring-items?status=ended&sort=${selectedSort}&category=${selectedCategory}`}
           >
             Beendet
           </Link>
           <Link
             className={selectedStatus === "all" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=all&sort=${selectedSort}`}
+            href={`/recurring-items?status=all&sort=${selectedSort}&category=${selectedCategory}`}
           >
             Alle
           </Link>
@@ -67,16 +85,28 @@ export default async function RecurringItemsPage({
         <nav className={styles.filters} aria-label="Sortierung nach Fälligkeit">
           <Link
             className={selectedSort === "dueDateAsc" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=${selectedStatus}&sort=dueDateAsc`}
+            href={`/recurring-items?status=${selectedStatus}&sort=dueDateAsc&category=${selectedCategory}`}
           >
             Fällig zuerst
           </Link>
           <Link
             className={selectedSort === "dueDateDesc" ? styles.filterActive : styles.filter}
-            href={`/recurring-items?status=${selectedStatus}&sort=dueDateDesc`}
+            href={`/recurring-items?status=${selectedStatus}&sort=dueDateDesc&category=${selectedCategory}`}
           >
             Später zuerst
           </Link>
+        </nav>
+
+        <nav className={styles.filters} aria-label="Filter nach Kategorie">
+          {categoryFilters.map((category) => (
+            <Link
+              key={category.value}
+              className={selectedCategory === category.value ? styles.filterActive : styles.filter}
+              href={`/recurring-items?status=${selectedStatus}&sort=${selectedSort}&category=${category.value}`}
+            >
+              {category.label}
+            </Link>
+          ))}
         </nav>
       </div>
 
