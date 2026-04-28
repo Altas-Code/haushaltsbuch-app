@@ -22,6 +22,10 @@ const categoryOptions = [
   { value: "other", label: "Sonstiges" },
 ] as const;
 
+function getTodayDateInput() {
+  return new Date().toISOString().slice(0, 10);
+}
+
 export function CreateRecurringItemForm() {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
@@ -68,56 +72,90 @@ export function CreateRecurringItemForm() {
         await handleSubmit(formData);
       }}
     >
-      <div className={styles.grid}>
-        <label>
-          <span>Name</span>
-          <input name="name" type="text" placeholder="z. B. Netflix" required />
-        </label>
+      <div className={styles.formIntro}>
+        <p className={styles.kicker}>Schnell erfassen</p>
+        <h3>Die wichtigsten Felder zuerst</h3>
+        <p>
+          Name, Betrag, Intervall und Fälligkeit reichen für den ersten nutzbaren Eintrag. Kategorie und Notiz kannst du direkt ergänzen.
+        </p>
+      </div>
 
-        <label>
-          <span>Betrag in Euro</span>
-          <input name="amount" type="number" min="0.01" step="0.01" placeholder="17.99" required />
-        </label>
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h4>Kernangaben</h4>
+          <p>Alles, was für den Eintrag wirklich nötig ist.</p>
+        </div>
 
-        <label>
-          <span>Intervall</span>
-          <select name="interval" defaultValue="monthly">
-            {intervalOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className={styles.grid}>
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" placeholder="z. B. Netflix" autoComplete="off" required />
+          </label>
 
-        <label>
-          <span>Nächste Fälligkeit</span>
-          <input name="nextDueDate" type="date" required />
-        </label>
+          <label>
+            <span>Betrag in Euro</span>
+            <input
+              name="amount"
+              type="number"
+              min="0.01"
+              step="0.01"
+              inputMode="decimal"
+              placeholder="17.99"
+              required
+            />
+          </label>
 
-        <label>
-          <span>Kategorie</span>
-          <select name="category" defaultValue="">
-            {categoryOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            <span>Intervall</span>
+            <select name="interval" defaultValue="monthly">
+              {intervalOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
 
-        <label className={styles.notes}>
-          <span>Notiz</span>
-          <textarea name="notes" rows={4} placeholder="Optional" />
-        </label>
+          <label>
+            <span>Nächste Fälligkeit</span>
+            <input name="nextDueDate" type="date" defaultValue={getTodayDateInput()} required />
+          </label>
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h4>Einordnung</h4>
+          <p>Hilft später beim Lesen, ist aber leichtgewichtig gehalten.</p>
+        </div>
+
+        <div className={styles.grid}>
+          <label>
+            <span>Kategorie</span>
+            <select name="category" defaultValue="">
+              {categoryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className={styles.notes}>
+            <span>Notiz</span>
+            <textarea name="notes" rows={4} placeholder="Optional" />
+          </label>
+        </div>
       </div>
 
       {error ? <p className={styles.error}>{error}</p> : null}
       {success ? <p className={styles.success}>{success}</p> : null}
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Speichert..." : "Wiederkehrenden Eintrag anlegen"}
-      </button>
+      <div className={styles.submitRow}>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Speichert..." : "Wiederkehrenden Eintrag anlegen"}
+        </button>
+      </div>
     </form>
   );
 }

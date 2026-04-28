@@ -1,16 +1,56 @@
 .form {
   display: grid;
-  gap: 16px;
-  padding: 24px;
+  gap: 18px;
+  padding: 20px;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 20px;
 }
 
+.formIntro {
+  display: grid;
+  gap: 8px;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.formIntro h3,
+.sectionHeader h4 {
+  margin: 0;
+}
+
+.formIntro p,
+.sectionHeader p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.section {
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--surface) 78%, white 22%);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: 6px;
+}
+
 .grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .form label {
@@ -28,18 +68,38 @@
 .form select,
 .form textarea {
   width: 100%;
+  min-height: 48px;
   padding: 12px 14px;
   border: 1px solid var(--border);
   border-radius: 12px;
   background: #fff;
+  font: inherit;
+}
+
+.form textarea {
+  min-height: 132px;
+  resize: vertical;
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--accent) 35%, white 65%);
+  outline-offset: 1px;
+  border-color: var(--accent);
 }
 
 .notes {
   grid-column: 1 / -1;
 }
 
+.submitRow {
+  display: grid;
+}
+
 .form button {
-  min-height: 48px;
+  width: 100%;
+  min-height: 52px;
   border: 0;
   border-radius: 999px;
   background: var(--accent);
@@ -53,12 +113,42 @@
   cursor: wait;
 }
 
-.error {
+.error,
+.success {
   margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+}
+
+.error {
   color: #b42318;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
 }
 
 .success {
-  margin: 0;
   color: #067647;
+  background: #ecfdf3;
+  border: 1px solid #abefc6;
+}
+
+@media (min-width: 640px) {
+  .form {
+    padding: 24px;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .submitRow {
+    justify-content: start;
+  }
+
+  .form button {
+    width: auto;
+    min-width: 280px;
+    padding: 0 22px;
+  }
 }

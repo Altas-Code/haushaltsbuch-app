@@ -77,73 +77,98 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
         await handleSubmit(formData);
       }}
     >
-      <div className={styles.grid}>
-        <label>
-          <span>Name</span>
-          <input name="name" type="text" defaultValue={item.name} required />
-        </label>
+      <div className={styles.formIntro}>
+        <p className={styles.kicker}>Schnell anpassen</p>
+        <h3>Wichtige Änderungen ohne Umwege</h3>
+        <p>Die Kernangaben stehen oben, Status und Notizen folgen danach.</p>
+      </div>
 
-        <label>
-          <span>Betrag in Euro</span>
-          <input
-            name="amount"
-            type="number"
-            min="0.01"
-            step="0.01"
-            defaultValue={(item.amountCents / 100).toFixed(2)}
-            required
-          />
-        </label>
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h4>Kernangaben</h4>
+          <p>Name, Betrag, Intervall und nächste Fälligkeit zuerst.</p>
+        </div>
 
-        <label>
-          <span>Intervall</span>
-          <select name="interval" defaultValue={item.interval}>
-            {intervalOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <div className={styles.grid}>
+          <label>
+            <span>Name</span>
+            <input name="name" type="text" defaultValue={item.name} autoComplete="off" required />
+          </label>
 
-        <label>
-          <span>Nächste Fälligkeit</span>
-          <input name="nextDueDate" type="date" defaultValue={formatDateInput(item.nextDueDate)} required />
-        </label>
+          <label>
+            <span>Betrag in Euro</span>
+            <input
+              name="amount"
+              type="number"
+              min="0.01"
+              step="0.01"
+              inputMode="decimal"
+              defaultValue={(item.amountCents / 100).toFixed(2)}
+              required
+            />
+          </label>
 
-        <label>
-          <span>Kategorie</span>
-          <select name="category" defaultValue={item.category ?? ""}>
-            {categoryOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            <span>Intervall</span>
+            <select name="interval" defaultValue={item.interval}>
+              {intervalOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
 
-        <label>
-          <span>Status</span>
-          <select name="status" defaultValue={item.status}>
-            {statusOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </label>
+          <label>
+            <span>Nächste Fälligkeit</span>
+            <input name="nextDueDate" type="date" defaultValue={formatDateInput(item.nextDueDate)} required />
+          </label>
+        </div>
+      </div>
 
-        <label className={styles.notes}>
-          <span>Notiz</span>
-          <textarea name="notes" rows={4} defaultValue={item.notes ?? ""} />
-        </label>
+      <div className={styles.section}>
+        <div className={styles.sectionHeader}>
+          <h4>Einordnung und Status</h4>
+          <p>Kategorie, Status und Notiz bleiben erreichbar, aber nicht im Weg.</p>
+        </div>
+
+        <div className={styles.grid}>
+          <label>
+            <span>Kategorie</span>
+            <select name="category" defaultValue={item.category ?? ""}>
+              {categoryOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            <span>Status</span>
+            <select name="status" defaultValue={item.status}>
+              {statusOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className={styles.notes}>
+            <span>Notiz</span>
+            <textarea name="notes" rows={4} defaultValue={item.notes ?? ""} />
+          </label>
+        </div>
       </div>
 
       {error ? <p className={styles.error}>{error}</p> : null}
 
-      <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Speichert..." : "Eintrag aktualisieren"}
-      </button>
+      <div className={styles.submitRow}>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Speichert..." : "Eintrag aktualisieren"}
+        </button>
+      </div>
     </form>
   );
 }

@@ -18,7 +18,7 @@ export default async function EditRecurringItemPage({ params }: { params: Promis
     <AppShell>
       <section className={styles.intro}>
         <h2>Wiederkehrenden Eintrag bearbeiten</h2>
-        <p>Hier kannst du Betrag, Intervall, Fälligkeit, Kategorie und Status anpassen.</p>
+        <p>Die wichtigsten Änderungen stehen oben. Kategorie, Status und Notiz folgen direkt danach.</p>
       </section>
       <EditRecurringItemForm item={item} />
       <div className={styles.actions}>

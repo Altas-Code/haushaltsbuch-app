@@ -9,7 +9,7 @@ export default function NewRecurringItemPage() {
     <AppShell>
       <section className={styles.intro}>
         <h2>Neuen wiederkehrenden Eintrag anlegen</h2>
-        <p>Starte mit Name, Betrag, Intervall und nächster Fälligkeit.</p>
+        <p>Starte mit den Kernfeldern. Der Ablauf ist auf schnelle mobile Eingabe und ruhige Nachbearbeitung ausgelegt.</p>
       </section>
       <CreateRecurringItemForm />
       <div className={styles.actions}>
