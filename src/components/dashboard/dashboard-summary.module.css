@@ -23,6 +23,7 @@
 
 .copy {
   margin: 0;
+  max-width: 60ch;
   color: var(--text-muted);
   line-height: 1.6;
 }
@@ -31,8 +32,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  padding: 0 16px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 18px;
   border-radius: 999px;
   background: var(--accent);
   color: white;
@@ -41,8 +43,8 @@
 
 .kpis {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: 1fr;
+  gap: 12px;
 }
 
 .kpiCard,
@@ -61,7 +63,10 @@
 }
 
 .value {
-  font-size: 1.5rem;
+  display: block;
+  font-size: clamp(1.35rem, 5vw, 1.75rem);
+  line-height: 1.15;
+  word-break: break-word;
 }
 
 .upcomingSection {
@@ -70,10 +75,8 @@
 }
 
 .sectionHeader {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: flex-start;
+  display: grid;
+  gap: 12px;
 }
 
 .sectionHeader h3 {
@@ -97,10 +100,8 @@
 }
 
 .upcomingCard {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: flex-start;
+  display: grid;
+  gap: 14px;
 }
 
 .upcomingCard h4 {
@@ -110,6 +111,46 @@
 .upcomingMeta {
   display: grid;
   gap: 6px;
-  text-align: right;
   font-weight: 600;
+}
+
+@media (min-width: 640px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .cta {
+    width: auto;
+    min-width: 220px;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .sectionHeader {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .upcomingCard {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: start;
+  }
+
+  .upcomingMeta {
+    text-align: right;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero {
+    padding: 28px;
+  }
+
+  .kpis {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
