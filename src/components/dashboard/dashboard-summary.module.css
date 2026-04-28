@@ -1,0 +1,115 @@
+.wrapper {
+  display: grid;
+  gap: 24px;
+}
+
+.hero {
+  display: grid;
+  gap: 16px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.copy {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.kpiCard,
+.upcomingCard,
+.emptyState {
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+.label {
+  margin: 0 0 10px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.value {
+  font-size: 1.5rem;
+}
+
+.upcomingSection {
+  display: grid;
+  gap: 16px;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.sectionHeader h3 {
+  margin: 0 0 8px;
+}
+
+.sectionHeader p,
+.upcomingCard p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.link {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.upcomingList {
+  display: grid;
+  gap: 12px;
+}
+
+.upcomingCard {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.upcomingCard h4 {
+  margin: 0 0 6px;
+}
+
+.upcomingMeta {
+  display: grid;
+  gap: 6px;
+  text-align: right;
+  font-weight: 600;
+}

@@ -1,15 +1,14 @@
 import React from "react";
-import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
-import { DashboardPlaceholder } from "@/components/dashboard/dashboard-placeholder";
+import { DashboardSummary } from "@/components/dashboard/dashboard-summary";
+import { getDashboardSummary } from "@/application/recurring-item/get-dashboard-summary";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const summary = await getDashboardSummary();
+
   return (
     <AppShell>
-      <DashboardPlaceholder />
-      <p>
-        <Link href="/recurring-items/new">Zum ersten recurring item</Link>
-      </p>
+      <DashboardSummary summary={summary} />
     </AppShell>
   );
 }
