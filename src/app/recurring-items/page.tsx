@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
+import { DeleteRecurringItemForm } from "@/components/recurring-items/delete-recurring-item-form";
 import { StatusActionForm } from "@/components/recurring-items/status-action-form";
 import {
   listRecurringItems,
@@ -56,6 +57,7 @@ export default async function RecurringItemsPage({
   searchParams?: Promise<{
     created?: string;
     updated?: string;
+    deleted?: string;
     status?: "active" | "paused" | "ended" | "all";
     sort?: RecurringItemSort;
     category?: RecurringItemCategoryFilter;
@@ -82,6 +84,7 @@ export default async function RecurringItemsPage({
 
       {params?.created === "1" ? <p className={styles.notice}>Eintrag erfolgreich angelegt.</p> : null}
       {params?.updated === "1" ? <p className={styles.notice}>Eintrag erfolgreich aktualisiert.</p> : null}
+      {params?.deleted === "1" ? <p className={styles.notice}>Eintrag erfolgreich gelöscht.</p> : null}
 
       <div className={styles.toolbar}>
         <nav className={styles.filters}>
@@ -189,6 +192,7 @@ export default async function RecurringItemsPage({
                 <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="active" />
                 <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="paused" />
                 <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="ended" />
+                <DeleteRecurringItemForm id={item.id} />
               </div>
             </article>
           ))}
