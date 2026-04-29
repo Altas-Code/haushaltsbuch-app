@@ -172,7 +172,27 @@ Jede relevante Änderung muss in CI mindestens durch diese Prüfschritte laufen,
 
 ---
 
-# 8. Review- und Merge-Fähigkeit
+# 8. GitHub- und Backlog-Hygiene
+
+## 8.1 GitHub-Issue-Stand aktualisiert
+- Das zugehörige GitHub-Issue wurde nach der Umsetzung auf den tatsächlichen Stand gebracht.
+- Kommentare im Issue spiegeln den realen Fortschritt wider.
+- Erledigte Arbeit bleibt nicht fälschlich als offen stehen.
+- Offene Restarbeiten wurden als Folgeaufgaben oder neue Issues sichtbar gemacht.
+
+## 8.2 Labels und Release-Zuordnung gepflegt
+- Status-Labels passen zum tatsächlichen Umsetzungsstand.
+- Release-Labels wurden geprüft und bei Bedarf korrigiert.
+- Priorität, Bereich und sonstige operative Labels sind nicht veraltet oder irreführend.
+
+## 8.3 GitHub ist mit dem Code synchron
+- GitHub Issues sind der operative Wahrheitsstand und müssen zum tatsächlichen Code passen.
+- Bereits umgesetzte Features dürfen nicht über längere Zeit als offene Backlog-Issues stehen bleiben.
+- Wenn beim Arbeiten Inkonsistenzen auffallen, werden sie im selben Arbeitsblock bereinigt oder explizit dokumentiert.
+
+---
+
+# 9. Review- und Merge-Fähigkeit
 
 ## 8.1 Änderung ist reviewbar
 - Umfang ist nachvollziehbar.
@@ -189,7 +209,7 @@ Vor Abschluss wurde geprüft:
 
 ---
 
-# 9. Release-Fähigkeit
+# 10. Release-Fähigkeit
 
 ## 9.1 Kein halbfertiger Zustand
 - Das Item hinterlässt keinen inkonsistenten Benutzerzustand.
@@ -203,7 +223,7 @@ Vor Abschluss wurde geprüft:
 
 ---
 
-# 10. Checkliste für jedes Backlog Item
+# 11. Checkliste für jedes Backlog Item
 
 Ein Backlog Item ist nur done, wenn alle Fragen ehrlich mit Ja beantwortet werden können:
 
@@ -217,6 +237,7 @@ Ein Backlog Item ist nur done, wenn alle Fragen ehrlich mit Ja beantwortet werde
 - Ist die Änderung vollständig integriert?
 - Sind Datenmodell, Persistenz und Schnittstellen korrekt berücksichtigt?
 - Wurde relevante Dokumentation aktualisiert?
+- Wurden GitHub-Issue-Stand, Labels und Release-Zuordnung auf den echten Stand gebracht?
 - Ist die CI/CD-Abdeckung passend und grün?
 - Ist die Änderung buildbar, dockerfähig und deploybar?
 - Ist das Ergebnis wirklich releasefähig?
@@ -225,7 +246,7 @@ Wenn eine dieser Fragen mit Nein beantwortet wird, ist das Item noch offen.
 
 ---
 
-# 11. Praktische Regel für dieses Projekt
+# 12. Praktische Regel für dieses Projekt
 
 Für dieses Projekt gilt ausdrücklich:
 
