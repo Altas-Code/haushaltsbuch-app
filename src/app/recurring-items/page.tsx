@@ -8,6 +8,7 @@ import {
   type RecurringItemCategoryFilter,
   type RecurringItemSort,
 } from "@/application/recurring-item/list-recurring-items";
+import { calculateMonthlyAmount } from "@/domain/recurring-item/calculations";
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./page.module.css";
 
@@ -51,6 +52,10 @@ const categoryFilters: { value: RecurringItemCategoryFilter; label: string }[] =
   { value: "uncategorized", label: "Ohne Kategorie" },
 ];
 
+function getCategoryLabel(category: RecurringItemCategoryFilter) {
+  return categoryFilters.find((entry) => entry.value === category)?.label ?? "Ohne Kategorie";
+}
+
 export default async function RecurringItemsPage({
   searchParams,
 }: {
@@ -69,6 +74,34 @@ export default async function RecurringItemsPage({
   const selectedCategory = params?.category ?? "all";
   const items = await listRecurringItems(selectedStatus, selectedSort, selectedCategory);
   const emptyState = getEmptyStateContent(selectedStatus, selectedCategory);
+
+  const groupedItems = items.reduce<
+    Array<{
+      category: RecurringItemCategoryFilter;
+      label: string;
+      totalMonthlyAmountCents: number;
+      items: typeof items;
+    }>
+  >((groups, item) => {
+    const category = (item.category ?? "uncategorized") as RecurringItemCategoryFilter;
+    const existingGroup = groups.find((group) => group.category === category);
+    const monthlyAmount = calculateMonthlyAmount(item.amountCents, item.interval);
+
+    if (existingGroup) {
+      existingGroup.items.push(item);
+      existingGroup.totalMonthlyAmountCents += monthlyAmount;
+      return groups;
+    }
+
+    groups.push({
+      category,
+      label: getCategoryLabel(category),
+      totalMonthlyAmountCents: monthlyAmount,
+      items: [item],
+    });
+
+    return groups;
+  }, []);
 
   return (
     <AppShell>
@@ -158,43 +191,64 @@ export default async function RecurringItemsPage({
         </section>
       ) : (
         <section className={styles.list}>
-          {items.map((item) => (
-            <article className={styles.card} key={item.id}>
-              <div className={styles.cardHeader}>
+          {groupedItems.map((group) => (
+            <section className={styles.groupSection} key={group.category}>
+              <div className={styles.groupHeader}>
                 <div>
-                  <h3>{item.name}</h3>
-                  <p>{item.category ?? "ohne Kategorie"}</p>
+                  <h3>{group.label}</h3>
+                  <p>{group.items.length} Eintrag{group.items.length === 1 ? "" : "e"}</p>
                 </div>
-                <Link className={styles.editLink} href={`/recurring-items/${item.id}/edit`}>
-                  Bearbeiten
-                </Link>
+                <div className={styles.groupSummary}>
+                  <span>Monatsschnitt der Gruppe</span>
+                  <strong>{formatCurrency(group.totalMonthlyAmountCents)}</strong>
+                </div>
               </div>
-              <dl>
-                <div>
-                  <dt>Betrag</dt>
-                  <dd>{formatCurrency(item.amountCents, item.currency)}</dd>
-                </div>
-                <div>
-                  <dt>Intervall</dt>
-                  <dd>{item.interval}</dd>
-                </div>
-                <div>
-                  <dt>Nächste Fälligkeit</dt>
-                  <dd>{formatDate(item.nextDueDate)}</dd>
-                </div>
-                <div>
-                  <dt>Status</dt>
-                  <dd><span className={styles.statusBadge}>{item.status}</span></dd>
-                </div>
-              </dl>
 
-              <div className={styles.actionsRow}>
-                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="active" />
-                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="paused" />
-                <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="ended" />
-                <DeleteRecurringItemForm id={item.id} />
+              <div className={styles.groupCards}>
+                {group.items.map((item) => (
+                  <article className={styles.card} key={item.id}>
+                    <div className={styles.cardHeader}>
+                      <div>
+                        <h3>{item.name}</h3>
+                        <p>{group.label}</p>
+                      </div>
+                      <Link className={styles.editLink} href={`/recurring-items/${item.id}/edit`}>
+                        Bearbeiten
+                      </Link>
+                    </div>
+                    <dl>
+                      <div>
+                        <dt>Betrag</dt>
+                        <dd>{formatCurrency(item.amountCents, item.currency)}</dd>
+                      </div>
+                      <div>
+                        <dt>Monatsschnitt</dt>
+                        <dd>{formatCurrency(calculateMonthlyAmount(item.amountCents, item.interval), item.currency)}</dd>
+                      </div>
+                      <div>
+                        <dt>Intervall</dt>
+                        <dd>{item.interval}</dd>
+                      </div>
+                      <div>
+                        <dt>Nächste Fälligkeit</dt>
+                        <dd>{formatDate(item.nextDueDate)}</dd>
+                      </div>
+                      <div>
+                        <dt>Status</dt>
+                        <dd><span className={styles.statusBadge}>{item.status}</span></dd>
+                      </div>
+                    </dl>
+
+                    <div className={styles.actionsRow}>
+                      <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="active" />
+                      <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="paused" />
+                      <StatusActionForm id={item.id} currentStatus={item.status} nextStatus="ended" />
+                      <DeleteRecurringItemForm id={item.id} />
+                    </div>
+                  </article>
+                ))}
               </div>
-            </article>
+            </section>
           ))}
         </section>
       )}
