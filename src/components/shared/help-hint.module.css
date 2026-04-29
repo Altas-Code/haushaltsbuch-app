@@ -1,0 +1,31 @@
+.hint {
+  margin-top: 8px;
+}
+
+.summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 700;
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.content {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface) 82%, white 18%);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.content p {
+  margin: 0;
+}

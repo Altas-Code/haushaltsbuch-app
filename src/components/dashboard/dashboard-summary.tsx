@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { HelpHint } from "@/components/shared/help-hint";
 import type { AwaitedDashboardSummary } from "./types";
 import { formatCurrency, formatDate } from "@/lib/utils/formatters";
 import styles from "./dashboard-summary.module.css";
@@ -11,9 +12,10 @@ export function DashboardSummary({ summary }: { summary: AwaitedDashboardSummary
         <div>
           <p className={styles.eyebrow}>Fixkosten im Überblick</p>
           <h2 id="dashboard-heading">Dein Monatsschnitt auf einen Blick</h2>
-          <p className={styles.copy}>
-            Die wichtigste Kennzahl ist dein durchschnittlicher Monatswert über alle aktiven wiederkehrenden Einträge.
-          </p>
+          <p className={styles.copy}>Dein aktueller Überblick über wiederkehrende Fixkosten.</p>
+          <HelpHint label="Wie lese ich das?">
+            <p>Der Monatsschnitt zeigt dir die durchschnittliche monatliche Belastung über alle aktiven wiederkehrenden Einträge.</p>
+          </HelpHint>
         </div>
         <Link className={styles.cta} href="/recurring-items/new">
           Neuen Eintrag anlegen
@@ -43,7 +45,9 @@ export function DashboardSummary({ summary }: { summary: AwaitedDashboardSummary
         <div className={styles.sectionHeader}>
           <div>
             <h3>Nächste Fälligkeiten</h3>
-            <p>Die nächsten anstehenden Belastungen in chronologischer Reihenfolge.</p>
+            <HelpHint label="Was ist hier zu sehen?">
+              <p>Hier stehen die nächsten anstehenden Belastungen in chronologischer Reihenfolge.</p>
+            </HelpHint>
           </div>
           <Link className={styles.link} href="/recurring-items?status=active">
             Alle Einträge ansehen

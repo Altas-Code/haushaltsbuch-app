@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { RecurringItemFieldErrorMap } from "@/domain/recurring-item/errors";
+import { HelpHint } from "@/components/shared/help-hint";
 import type { RecurringItem } from "@/domain/recurring-item/model";
 import styles from "./create-recurring-item-form.module.css";
 
@@ -89,13 +90,17 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
       <div className={styles.formIntro}>
         <p className={styles.kicker}>Schnell anpassen</p>
         <h3>Wichtige Änderungen ohne Umwege</h3>
-        <p>Die Kernangaben stehen oben, Status und Notizen folgen danach.</p>
+        <HelpHint label="Wie ist das Formular aufgebaut?">
+          <p>Oben stehen die Kernangaben. Status, Kategorie und Notiz folgen danach, wenn du mehr anpassen willst.</p>
+        </HelpHint>
       </div>
 
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h4>Kernangaben</h4>
-          <p>Name, Betrag, Intervall und nächste Fälligkeit zuerst.</p>
+          <HelpHint label="Wofür ist dieser Bereich?">
+            <p>Hier änderst du die fachlich wichtigsten Angaben wie Betrag, Intervall und nächste Fälligkeit.</p>
+          </HelpHint>
         </div>
 
         <div className={styles.grid}>
@@ -143,7 +148,9 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h4>Einordnung und Status</h4>
-          <p>Kategorie, Status und Notiz bleiben erreichbar, aber nicht im Weg.</p>
+          <HelpHint label="Wann ändere ich das?">
+            <p>Diesen Bereich brauchst du für Gruppierung, spätere Lesbarkeit und Statuswechsel des Eintrags.</p>
+          </HelpHint>
         </div>
 
         <div className={styles.grid}>

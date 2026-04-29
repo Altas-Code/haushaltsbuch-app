@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { RecurringItemFieldErrorMap } from "@/domain/recurring-item/errors";
+import { HelpHint } from "@/components/shared/help-hint";
 import styles from "./create-recurring-item-form.module.css";
 
 const intervalOptions = [
@@ -84,15 +85,17 @@ export function CreateRecurringItemForm() {
       <div className={styles.formIntro}>
         <p className={styles.kicker}>Schnell erfassen</p>
         <h3>Die wichtigsten Felder zuerst</h3>
-        <p>
-          Name, Betrag, Intervall und Fälligkeit reichen für den ersten nutzbaren Eintrag. Kategorie und Notiz kannst du direkt ergänzen.
-        </p>
+        <HelpHint label="Welche Angaben brauche ich?">
+          <p>Name, Betrag, Intervall und Fälligkeit reichen für den ersten nutzbaren Eintrag. Kategorie und Notiz kannst du bei Bedarf ergänzen.</p>
+        </HelpHint>
       </div>
 
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h4>Kernangaben</h4>
-          <p>Alles, was für den Eintrag wirklich nötig ist.</p>
+          <HelpHint label="Wofür ist dieser Bereich?">
+            <p>Hier stehen nur die Pflichtangaben, damit du einen Eintrag schnell erfassen kannst.</p>
+          </HelpHint>
         </div>
 
         <div className={styles.grid}>
@@ -140,7 +143,9 @@ export function CreateRecurringItemForm() {
       <div className={styles.section}>
         <div className={styles.sectionHeader}>
           <h4>Einordnung</h4>
-          <p>Hilft später beim Lesen, ist aber leichtgewichtig gehalten.</p>
+          <HelpHint label="Wann brauche ich das?">
+            <p>Kategorie und Notiz helfen dir später beim Lesen und Gruppieren, sind aber nicht zwingend für den ersten Eintrag.</p>
+          </HelpHint>
         </div>
 
         <div className={styles.grid}>
