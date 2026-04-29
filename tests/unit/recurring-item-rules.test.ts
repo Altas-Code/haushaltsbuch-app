@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { RecurringItemValidationError } from "@/domain/recurring-item/errors";
 import { validateRecurringItemInput } from "@/domain/recurring-item/rules";
 
 describe("validateRecurringItemInput", () => {
@@ -17,14 +18,25 @@ describe("validateRecurringItemInput", () => {
     expect(result.category).toBe("subscription");
   });
 
-  it("rejects missing name", () => {
-    expect(() =>
+  it("returns structured field errors for invalid input", () => {
+    try {
       validateRecurringItemInput({
         name: "   ",
-        amountCents: 1000,
+        amountCents: 0,
         interval: "monthly",
-        nextDueDate: "2026-05-01",
-      }),
-    ).toThrow(/name ist erforderlich/i);
+        nextDueDate: "not-a-date",
+        notes: "x".repeat(501),
+      });
+      throw new Error("Expected validation to fail");
+    } catch (error) {
+      expect(error).toBeInstanceOf(RecurringItemValidationError);
+      if (error instanceof RecurringItemValidationError) {
+        expect(error.message).toMatch(/markierten felder/i);
+        expect(error.fieldErrors.name).toMatch(/namen/i);
+        expect(error.fieldErrors.amount).toMatch(/betrag/i);
+        expect(error.fieldErrors.nextDueDate).toMatch(/fälligkeit/i);
+        expect(error.fieldErrors.notes).toMatch(/500 zeichen/i);
+      }
+    }
   });
 });

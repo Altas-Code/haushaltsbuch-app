@@ -1,3 +1,4 @@
+import { RecurringItemValidationError } from "./errors";
 import type { CreateRecurringItemInput, RecurringItemCategory, RecurringInterval, RecurringItemStatus } from "./model";
 
 const intervals: RecurringInterval[] = ["monthly", "quarterly", "semiannual", "yearly"];
@@ -23,35 +24,45 @@ export type ValidatedRecurringItemInput = {
 };
 
 export function validateRecurringItemInput(input: CreateRecurringItemInput): ValidatedRecurringItemInput {
+  const fieldErrors: Record<string, string> = {};
+
   const name = input.name.trim();
   if (!name) {
-    throw new Error("Name ist erforderlich.");
+    fieldErrors.name = "Bitte gib einen Namen für den Eintrag an.";
   }
 
   if (!Number.isInteger(input.amountCents) || input.amountCents <= 0) {
-    throw new Error("Betrag muss größer als 0 sein.");
+    fieldErrors.amount = "Bitte gib einen Betrag größer als 0 Euro an.";
   }
 
   if (!intervals.includes(input.interval)) {
-    throw new Error("Intervall ist ungültig.");
+    fieldErrors.interval = "Bitte wähle ein gültiges Intervall aus.";
   }
 
   const nextDueDate = new Date(input.nextDueDate);
   if (Number.isNaN(nextDueDate.getTime())) {
-    throw new Error("Nächstes Fälligkeitsdatum ist ungültig.");
+    fieldErrors.nextDueDate = "Bitte gib eine gültige nächste Fälligkeit an.";
   }
 
   const status = input.status ?? "active";
   if (!statuses.includes(status)) {
-    throw new Error("Status ist ungültig.");
+    fieldErrors.status = "Bitte wähle einen gültigen Status aus.";
   }
 
   const category = input.category?.trim() ? (input.category as RecurringItemCategory) : null;
   if (category && !categories.includes(category)) {
-    throw new Error("Kategorie ist ungültig.");
+    fieldErrors.category = "Bitte wähle eine gültige Kategorie aus.";
   }
 
   const notes = input.notes?.trim() ? input.notes.trim() : null;
+
+  if (notes && notes.length > 500) {
+    fieldErrors.notes = "Die Notiz darf höchstens 500 Zeichen lang sein.";
+  }
+
+  if (Object.keys(fieldErrors).length > 0) {
+    throw new RecurringItemValidationError("Bitte prüfe die markierten Felder.", fieldErrors);
+  }
 
   return {
     name,

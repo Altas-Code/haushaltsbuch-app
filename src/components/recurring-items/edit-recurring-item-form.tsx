@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import type { RecurringItemFieldErrorMap } from "@/domain/recurring-item/errors";
 import type { RecurringItem } from "@/domain/recurring-item/model";
 import styles from "./create-recurring-item-form.module.css";
 
@@ -33,13 +34,20 @@ function formatDateInput(date: Date) {
   return date.toISOString().slice(0, 10);
 }
 
+type FormErrorResponse = {
+  error?: string;
+  fieldErrors?: RecurringItemFieldErrorMap;
+};
+
 export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<RecurringItemFieldErrorMap>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   async function handleSubmit(formData: FormData) {
     setError(null);
+    setFieldErrors({});
     setIsSubmitting(true);
 
     const payload = {
@@ -59,8 +67,9 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
     });
 
     if (!response.ok) {
-      const data = (await response.json()) as { error?: string };
+      const data = (await response.json()) as FormErrorResponse;
       setError(data.error ?? "Eintrag konnte nicht aktualisiert werden.");
+      setFieldErrors(data.fieldErrors ?? {});
       setIsSubmitting(false);
       return;
     }
@@ -92,7 +101,8 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
         <div className={styles.grid}>
           <label>
             <span>Name</span>
-            <input name="name" type="text" defaultValue={item.name} autoComplete="off" required />
+            <input name="name" type="text" defaultValue={item.name} autoComplete="off" aria-invalid={Boolean(fieldErrors.name)} required />
+            {fieldErrors.name ? <small className={styles.fieldError}>{fieldErrors.name}</small> : null}
           </label>
 
           <label>
@@ -104,24 +114,28 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
               step="0.01"
               inputMode="decimal"
               defaultValue={(item.amountCents / 100).toFixed(2)}
+              aria-invalid={Boolean(fieldErrors.amount)}
               required
             />
+            {fieldErrors.amount ? <small className={styles.fieldError}>{fieldErrors.amount}</small> : null}
           </label>
 
           <label>
             <span>Intervall</span>
-            <select name="interval" defaultValue={item.interval}>
+            <select name="interval" defaultValue={item.interval} aria-invalid={Boolean(fieldErrors.interval)}>
               {intervalOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
+            {fieldErrors.interval ? <small className={styles.fieldError}>{fieldErrors.interval}</small> : null}
           </label>
 
           <label>
             <span>Nächste Fälligkeit</span>
-            <input name="nextDueDate" type="date" defaultValue={formatDateInput(item.nextDueDate)} required />
+            <input name="nextDueDate" type="date" defaultValue={formatDateInput(item.nextDueDate)} aria-invalid={Boolean(fieldErrors.nextDueDate)} required />
+            {fieldErrors.nextDueDate ? <small className={styles.fieldError}>{fieldErrors.nextDueDate}</small> : null}
           </label>
         </div>
       </div>
@@ -135,29 +149,32 @@ export function EditRecurringItemForm({ item }: { item: RecurringItem }) {
         <div className={styles.grid}>
           <label>
             <span>Kategorie</span>
-            <select name="category" defaultValue={item.category ?? ""}>
+            <select name="category" defaultValue={item.category ?? ""} aria-invalid={Boolean(fieldErrors.category)}>
               {categoryOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
+            {fieldErrors.category ? <small className={styles.fieldError}>{fieldErrors.category}</small> : null}
           </label>
 
           <label>
             <span>Status</span>
-            <select name="status" defaultValue={item.status}>
+            <select name="status" defaultValue={item.status} aria-invalid={Boolean(fieldErrors.status)}>
               {statusOptions.map((option) => (
                 <option key={option.value} value={option.value}>
                   {option.label}
                 </option>
               ))}
             </select>
+            {fieldErrors.status ? <small className={styles.fieldError}>{fieldErrors.status}</small> : null}
           </label>
 
           <label className={styles.notes}>
             <span>Notiz</span>
-            <textarea name="notes" rows={4} defaultValue={item.notes ?? ""} />
+            <textarea name="notes" rows={4} defaultValue={item.notes ?? ""} aria-invalid={Boolean(fieldErrors.notes)} />
+            {fieldErrors.notes ? <small className={styles.fieldError}>{fieldErrors.notes}</small> : null}
           </label>
         </div>
       </div>
