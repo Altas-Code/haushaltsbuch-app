@@ -73,6 +73,8 @@ Angezeigt werden zusätzlich:
 Im MVP:
 - kartenartige Darstellung
 - keine primäre Tabellenlogik
+- Gruppierung nach Kategorie in der Übersicht
+- Gruppensummen auf Basis des Monatsschnitts
 - pro Karte sichtbar:
   - Name
   - Kategorie
@@ -112,6 +114,12 @@ Im MVP reicht:
 
 Kein eigenes Onboarding-System.
 
+## Hilfetexte
+
+- Standardansichten sollen ruhig und knapp bleiben.
+- Erklärungstexte sollen nicht dauerhaft prominent sichtbar sein.
+- Zusatzhilfe soll bedarfsorientiert über aufklappbare Hilfen, Tap oder Klick verfügbar sein.
+
 ## Harter MVP-Kern
 
 Was im MVP auf keinen Fall fehlen darf:
@@ -121,7 +129,15 @@ Was im MVP auf keinen Fall fehlen darf:
 - Monatsschnitt gesamt
 - monatlich fällige Belastung
 - nächste Fälligkeiten
-- kartenartige Listenansicht
+- kartenartige und gruppierte Listenansicht
 - Statusfilter
 - beenden / pausieren / reaktivieren
 - mobile Eingabe gut nutzbar
+
+## Nach MVP priorisiert
+
+Früh nach dem MVP bzw. in den nächsten Releases besonders relevant:
+- benutzerdefinierte Intervalle
+- Kündigungsübersicht
+- kritische Fristen markieren
+- Nach Betrag sortieren

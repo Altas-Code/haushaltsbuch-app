@@ -33,10 +33,11 @@ Die Markdown-Dokumentation im Repository beschreibt weiterhin Produkt, Architekt
 ## MVP auf einen Blick
 
 Das MVP soll können:
-- wiederkehrende Einträge anlegen, bearbeiten, pausieren und beenden
+- wiederkehrende Einträge anlegen, bearbeiten, pausieren, beenden und löschen
 - monatliche und jährliche Gesamtbelastung berechnen
 - nächste Fälligkeiten anzeigen
-- aktive Verpflichtungen übersichtlich listen
+- aktive Verpflichtungen übersichtlich und nach Kategorien gruppiert listen
+- bedarfsorientierte Hilfen statt dauerhafter Erklärungstexte bieten
 - mobil und auf Desktop gut funktionieren
 - per Docker betrieben werden
 
@@ -207,6 +208,23 @@ Für dieses Projekt gilt ausdrücklich:
 - `main` bleibt releasefähig
 - Docker-Betrieb ist Teil des Produktziels
 - Änderungen müssen rückverfolgbar und sauber reviewbar sein
+
+## Aktueller veröffentlichter Stand
+
+Veröffentlicht ist aktuell:
+- `v0.4.0`
+
+Der Stand enthält unter anderem:
+- Dashboard mit Kennzahlen und nächsten Fälligkeiten
+- responsive Dashboard-Ansicht
+- verbesserte Formular-UX
+- Sortierung nach Fälligkeit
+- Filter nach Kategorie und Status
+- bessere Empty States
+- strukturierte Validierung und verständliche Fehlerzustände
+- Löschfunktion für Einträge
+- kontextsensitive Hilfetexte
+- Gruppierung nach Kategorien mit Gruppensummen
 
 ## Nächster Schritt
 

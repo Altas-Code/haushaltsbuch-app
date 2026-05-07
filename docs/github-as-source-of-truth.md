@@ -50,3 +50,11 @@ GitHub Projects sind für dieses Projekt **optional** und nicht Teil der verbind
 ## Pflegeprinzip
 
 Wenn sich operative Planung ändert, wird sie in GitHub geändert, nicht zuerst in einer Markdown-Datei.
+
+Das gilt ausdrücklich auch für:
+- Issue-Status nach Implementierung
+- Release-Zuordnung von offenen Themen
+- Release Notes veröffentlichter Stände
+- das Schließen von bereits umgesetzten, aber fälschlich noch offenen Issues
+
+Markdown-Dokumente im Repo halten Produkt, Architektur und Qualitätsregeln fest, aber nicht den führenden operativen Fortschritt.
